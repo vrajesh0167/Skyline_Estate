@@ -1,25 +1,26 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 export default function Signup() {
     const [formData, setFormData] = useState({})
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
 
-    const changeHandler = (e) =>{
+    const changeHandler = (e) => {
         setFormData({
             ...formData,
             [e.target.id]: e.target.value
         })
     }
 
-    const SubmitHandler = async (e) =>{
+    const SubmitHandler = async (e) => {
         e.preventDefault();
         setLoading(true);
         try {
-            const res = await fetch('/api/user/signup',{
+            const res = await fetch('/api/user/signup', {
                 method: "POST",
-                headers:{
+                headers: {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify(formData)
@@ -27,19 +28,21 @@ export default function Signup() {
             const signup = await res.json();
             console.log(signup);
 
-            if(signup.success === false){
+            if (signup.success === false) {
                 setError(signup.message);
                 setLoading(false);
                 return;
             }
+            // Clear form data on successful sign-up
+            setFormData({});
+
             setError(null);
             setLoading(false);
+            navigate('/signin')
         } catch (error) {
             setError(error.message);
             setLoading(false);
         }
-
-
     }
 
     // console.log(formData);
