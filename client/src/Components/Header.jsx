@@ -1,7 +1,12 @@
 import React from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useLocation } from 'react-router-dom'
 
 export default function Header() {
+    const location = useLocation();
+
+    // Check if the current route is the signup page
+    const isSignUpPage = location.pathname === '/signup';
+
     return (
         <div>
             <header className=' bg-slate-200 shadow-md '>
@@ -16,7 +21,11 @@ export default function Header() {
                     <ul className=' flex gap-4'>
                         <NavLink to="/" className='nav-link text-xl font-semibold relative hidden md:block'>Home</NavLink>
                         <NavLink to='/about' className='nav-link text-xl font-semibold relative hidden md:block'>About Us</NavLink>
-                        <NavLink to='/signin' className='nav-link md:text-xl text-lg font-semibold relative'>Sign In</NavLink>
+                        {isSignUpPage ? (
+                            <NavLink to='/signup' className='nav-link md:text-xl text-lg font-semibold relative'>Sign Up</NavLink>
+                        ) : (
+                            <NavLink to='/signin' className='nav-link md:text-xl text-lg font-semibold relative'>Sign In</NavLink>
+                        )}
                     </ul>
                 </div>
             </header>
