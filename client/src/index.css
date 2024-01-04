@@ -1,3 +1,22 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background-color: #f1f5f1;
+}
+
+header .nav-link.active::before {
+    transform: scale(1);
+    transform-origin: left;
+}
+
+header .nav-link.active {
+    color: rgb(100 116 139);
+}

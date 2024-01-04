@@ -1,0 +1,21 @@
+header .nav-link::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -6px;
+    width: 100%;
+    height: 4px;
+    background-color: rgb(100 116 139);
+    transform: scale(0);
+    transition: transform .4s;
+    transform-origin: right;
+}
+header .nav-link:hover::before{
+    transform: scale(1);
+    transform-origin: left;
+}
+header .nav-link:hover{
+    color: rgb(100 116 139);
+}
+
