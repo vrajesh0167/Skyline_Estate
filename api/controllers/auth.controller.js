@@ -1,5 +1,6 @@
 import { User } from "../models/user.model.js";
 import bcrypt from 'bcrypt';
+import { errorHandler } from "../utils/errorHandler.js";
 
 export const signup = async (req, res, next) =>{
     // console.log(req.body);
@@ -16,6 +17,7 @@ export const signup = async (req, res, next) =>{
 
         res.status(201).json("User Create Successfully...")
     } catch (error) {
-        next(error);
+        // res.status(500).json("Internal Server Error");
+        next(errorHandler(209, "User Already Exits..."))
     }
 }
