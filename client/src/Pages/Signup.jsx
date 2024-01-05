@@ -1,11 +1,16 @@
 import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom'
+import { userCreateFail, userCreateStart, userCreateSuccess } from '../Store/User/Userslice';
 
 export default function Signup() {
     const [formData, setFormData] = useState({})
-    const [error, setError] = useState(null);
-    const [loading, setLoading] = useState(false);
+    // const [error, setError] = useState(null);
+    // const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
+
+    const {loading, error} = useSelector((state) => state.user);
+    const dispatch = useDispatch();
 
     const changeHandler = (e) => {
         setFormData({
@@ -16,7 +21,8 @@ export default function Signup() {
 
     const SubmitHandler = async (e) => {
         e.preventDefault();
-        setLoading(true);
+        // setLoading(true);
+        dispatch(userCreateStart());
         try {
             const res = await fetch('/api/user/signup', {
                 method: "POST",
@@ -29,19 +35,22 @@ export default function Signup() {
             console.log(signup);
 
             if (signup.success === false) {
-                setError(signup.message);
-                setLoading(false);
+                // setError(signup.message);
+                // setLoading(false);
+                dispatch(userCreateFail(signup.message));
                 return;
             }
             // Clear form data on successful sign-up
             setFormData({});
 
-            setError(null);
-            setLoading(false);
+            // setError(null);
+            // setLoading(false);
+            dispatch(userCreateSuccess(signup));
             navigate('/signin')
         } catch (error) {
-            setError(error.message);
-            setLoading(false);
+            // setError(error.message);
+            // setLoading(false);
+            dispatch(userCreateFail(error.message))
         }
     }
 
@@ -53,7 +62,7 @@ export default function Signup() {
                 <form action="" className=' flex flex-col gap-4' onSubmit={SubmitHandler}>
                     <input type='text' name='username' id='username' onChange={changeHandler} placeholder='Username' className=' border p-3 rounded-lg' />
                     <input type='email' name='email' id='email' onChange={changeHandler} placeholder='Email' className=' border p-3 rounded-lg' />
-                    <input type='password' name='password' id='password' onChange={changeHandler} placeholder='Password' autoComplete='true' className=' border p-3 rounded-lg' />
+                    <input type='password' onChange={changeHandler} name='password' id='password' placeholder='Password' autoComplete='off' className=' border p-3 rounded-lg' />
                     <button disabled={loading} className=' sign-btn border-2 border-sky-600 uppercase rounded-lg p-3 bg-sky-600 text-white  text-lg font-medium hover:text-sky-600 transition-all relative z-10'>{loading ? "Loading..." : "Sign Up"}</button>
                     <button className=' sign-btn-g border-2 border-sky-600 uppercase rounded-lg p-3 bg-sky-600 text-white  text-lg font-medium hover:text-sky-600 transition-all relative z-10'>Sign Up With Google</button>
                 </form>

@@ -1,12 +1,17 @@
 import React from 'react'
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { userCreateFail, userCreateStart, userCreateSuccess } from '../Store/User/Userslice';
 
 export default function Signin() {
     const [formData, setFormData] = useState({})
-    const [error, setError] = useState(null);
-    const [loading, setLoading] = useState(false);
+    // const [error, setError] = useState(null);
+    // const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
+
+    const {loading, error} = useSelector((state) => state.user)
+    const dispatch = useDispatch()
 
     const changeHandler = (e) => {
         setFormData({
@@ -17,7 +22,8 @@ export default function Signin() {
 
     const SubmitHandler = async (e) => {
         e.preventDefault();
-        setLoading(true);
+        // setLoading(true);
+        dispatch(userCreateStart())
         try {
             const res = await fetch('/api/user/signin', {
                 method: "POST",
@@ -30,20 +36,23 @@ export default function Signin() {
             console.log(signin);
 
             if (signin.success === false) {
-                setError(signin.message);
-                setLoading(false);
+                // setError(signin.message);
+                // setLoading(false);
+                dispatch(userCreateFail(signin.message))
                 return;
             }
             // Clear form data on successful sign-in
             setFormData({});
 
-            setError(null);
-            setLoading(false);
+            // setError(null);
+            // setLoading(false);
+            dispatch(userCreateSuccess(signin))
             navigate('/');
 
         } catch (error) {
-            setError(error.message);
-            setLoading(false);
+            // setError(error.message);
+            // setLoading(false);
+            dispatch(userCreateFail(error.message));
         }
     }
     return (
@@ -52,7 +61,7 @@ export default function Signin() {
                 <h1 className=' text-center text-3xl font-semibold text-slate-700 my-7'>Sign In</h1>
                 <form action="" className=' flex flex-col gap-4' onSubmit={SubmitHandler}>
                     <input type='email' name='email' id='email' onChange={changeHandler} placeholder='Email' className=' border p-3 rounded-lg' />
-                    <input type='password' name='password' id='password' onChange={changeHandler} placeholder='Password' className=' border p-3 rounded-lg' />
+                    <input type='password' name='password' id='password' autoComplete='off' onChange={changeHandler} placeholder='Password' className=' border p-3 rounded-lg' />
                     <button disabled={loading} className=' sign-btn border-2 border-sky-600 uppercase rounded-lg p-3 bg-sky-600 text-white  text-lg font-medium hover:text-sky-600 transition-all relative z-10'>{loading ? "Loading..." : "Sign In"}</button>
                     <button className=' sign-btn-g border-2 border-sky-600 uppercase rounded-lg p-3 bg-sky-600 text-white  text-lg font-medium hover:text-sky-600 transition-all relative z-10'>Sign In With Google</button>
                 </form>
