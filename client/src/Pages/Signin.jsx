@@ -1,17 +1,26 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { userCreateFail, userCreateStart, userCreateSuccess } from '../Store/User/Userslice';
 
-export default function Signin() {
+export default function Signin(props) {
+    const setProgress = props.setProgress
+
     const [formData, setFormData] = useState({})
     // const [error, setError] = useState(null);
     // const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
-    const {loading, error} = useSelector((state) => state.user)
+    const { loading, error } = useSelector((state) => state.user)
     const dispatch = useDispatch()
+
+    useEffect(() => {
+        setProgress(10)
+        setTimeout(() => {
+            setProgress(100)
+        }, 500)
+    }, [])
 
     const changeHandler = (e) => {
         setFormData({
