@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { userCreateFail, userCreateStart, userCreateSuccess } from '../Store/User/Userslice';
+import Googleauth from '../Components/Googleauth';
 
 export default function Signin(props) {
     const setProgress = props.setProgress
@@ -72,8 +73,9 @@ export default function Signin(props) {
                     <input type='text' name='email&username' id='email&username' onChange={changeHandler} placeholder='Username Or Email' className=' border p-3 rounded-lg' />
                     <input type='password' name='password' id='password' autoComplete='off' onChange={changeHandler} placeholder='Password' className=' border p-3 rounded-lg' />
                     <button disabled={loading} className=' sign-btn border-2 border-sky-600 uppercase rounded-lg p-3 bg-sky-600 text-white  text-lg font-medium hover:text-sky-600 transition-all relative z-10'>{loading ? "Loading..." : "Sign In"}</button>
-                    <button className=' sign-btn-g border-2 border-sky-600 uppercase rounded-lg p-3 bg-sky-600 text-white  text-lg font-medium hover:text-sky-600 transition-all relative z-10'>Sign In With Google</button>
+                    {/* <button className=' sign-btn-g border-2 border-sky-600 uppercase rounded-lg p-3 bg-sky-600 text-white  text-lg font-medium hover:text-sky-600 transition-all relative z-10'>Sign In With Google</button> */}
                 </form>
+                <Googleauth></Googleauth>
                 <div className=' text-center mt-5 '>
                     <p className=' text-lg font-medium'>Don't Have an account ? <span className=' ms-2 font-semibold text-blue-500 hover:underline'><Link to='/signup'>Sign Up</Link></span></p>
                 </div>
