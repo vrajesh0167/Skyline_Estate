@@ -1,8 +1,10 @@
 import React from 'react'
+import { useSelector } from 'react-redux';
 import { Link, NavLink, useLocation } from 'react-router-dom'
 
 export default function Header() {
     const location = useLocation();
+    const { currentUser } = useSelector((state) => state.user)
 
     // Check if the current route is the signup page
     const isSignUpPage = location.pathname === '/signup';
@@ -21,14 +23,27 @@ export default function Header() {
                     <ul className=' flex gap-4'>
                         <NavLink to="/" className='nav-link text-xl font-semibold relative hidden md:block'>Home</NavLink>
                         <NavLink to='/about' className='nav-link text-xl font-semibold relative hidden md:block'>About Us</NavLink>
-                        {isSignUpPage ? (
-                            <NavLink to='/signup' className='nav-link md:text-xl text-lg font-semibold relative'>Sign Up</NavLink>
-                        ) : (
-                            <NavLink to='/signin' className='nav-link md:text-xl text-lg font-semibold relative'>Sign In</NavLink>
-                        )}
+                        {
+                            currentUser ? (
+                                <Link to={'/profile'}>
+                                    <img src={currentUser.avatar} alt="Profile" className=' rounded-3xl bg-cover w-7 h-7 border-2 border-slate-500' />
+                                </Link>
+                            ) : (
+                                <div>
+                                    {
+                                        isSignUpPage ? (
+                                            <NavLink to='/signup' className='nav-link md:text-xl text-lg font-semibold relative' > Sign Up</NavLink>
+                                        ) : (
+                                            <NavLink to='/signin' className='nav-link md:text-xl text-lg font-semibold relative'>Sign In</NavLink>
+                                        )
+                                    }
+                                </div>
+                            )
+                        }
+
                     </ul>
                 </div>
-            </header>
-        </div>
+            </header >
+        </div >
     )
 }
