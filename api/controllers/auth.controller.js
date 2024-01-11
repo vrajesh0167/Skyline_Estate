@@ -24,10 +24,13 @@ export const signup = async (req, res, next) =>{
 }
 
 export const signin = async (req, res, next) =>{
-    const {email, password} = req.body;
+    const {username, email, password} = req.body;
 
     try {
-        const userFind = await User.findOne({email});
+        if(!username && !email){
+            return next(errorHandler(401, "username or email is required "));
+        }
+        const userFind = await User.findOne({$or: [{username}, {email}]});
         if(!userFind){
             return next(errorHandler(404, "User Not Found..."));
         } 
