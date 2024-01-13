@@ -4,12 +4,12 @@ import { Link, NavLink, useLocation } from 'react-router-dom'
 
 export default function Header() {
     const location = useLocation();
-    const { currentUser } = useSelector((state) => state.user)
+    const { currentUser } = useSelector((state) => state.user);
 
     // Check if the current route is the signup page
     const isSignUpPage = location.pathname === '/signup';
 
-    return (
+    return (    
         <div>
             <header className=' bg-slate-200 shadow-md '>
                 <div className=' max-w-7xl flex justify-between items-center mx-auto p-3'>
@@ -25,9 +25,9 @@ export default function Header() {
                         <NavLink to='/about' className='nav-link text-xl font-semibold relative hidden md:block'>About Us</NavLink>
                         {
                             currentUser ? (
-                                <Link to={'/profile'}>
+                                <NavLink to={'/profile'} className='nav-link'>
                                     <img src={currentUser.avatar} alt="Profile" className=' rounded-3xl bg-cover w-7 h-7 border-2 border-slate-500' />
-                                </Link>
+                                </NavLink>
                             ) : (
                                 <div>
                                     {

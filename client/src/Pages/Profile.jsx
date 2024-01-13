@@ -8,8 +8,8 @@ export default function Profile(props) {
         setTimeout(() => {
             setProgress(100);
         }, 500);
-    })
-    
+    },[])
+
     return (
         <div>Profile</div>
     )

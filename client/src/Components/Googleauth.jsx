@@ -15,8 +15,8 @@ export default function Googleauth() {
 
         try {
 
-            const provider = new GoogleAuthProvider();
             const auth = getAuth(Firebase);
+            const provider = new GoogleAuthProvider();
 
             const result = await signInWithPopup(auth, provider);
             console.log(result);
