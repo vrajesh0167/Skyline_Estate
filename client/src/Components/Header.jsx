@@ -25,7 +25,7 @@ export default function Header() {
                         <NavLink to='/about' className='nav-link text-xl font-semibold relative hidden md:block'>About Us</NavLink>
                         {
                             currentUser ? (
-                                <NavLink to={'/profile'} className='nav-link'>
+                                <NavLink to={'/profile'} className='nav-link relative'>
                                     <img src={currentUser.avatar} alt="Profile" className=' rounded-3xl bg-cover w-7 h-7 border-2 border-slate-500' />
                                 </NavLink>
                             ) : (

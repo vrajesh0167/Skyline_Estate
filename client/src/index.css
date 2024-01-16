@@ -12,6 +12,10 @@ body {
     background-color: #f1f5f1;
 }
 
+h1{
+    font-family: 'Poppins', sans-serif;
+}
+
 header .nav-link.active::before {
     transform: scale(1);
     transform-origin: left;
