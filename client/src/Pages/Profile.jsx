@@ -2,11 +2,11 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from "firebase/storage";
 import firebase from '../Firebase';
-import { userUpdateFail, userUpdateStart, userUpdateSuccess } from '../Store/User/Userslice';
+import { UserOutStart, userOutFail, userOutSuccess, userUpdateFail, userUpdateStart, userUpdateSuccess } from '../Store/User/Userslice';
 
 export default function Profile(props) {
     const setProgress = props.setProgress;
-    const { currentUser, error } = useSelector((state) => state.user);
+    const { currentUser, error, loading } = useSelector((state) => state.user);
     // console.log(currentUser);
     const fileRef = useRef(null);
     const [file, setFile] = useState(undefined);
@@ -58,6 +58,7 @@ export default function Profile(props) {
         )
     }
 
+    // onChange Handler
     const changeHandler = (e) => {
         setFormData({
             ...formData,
@@ -65,6 +66,7 @@ export default function Profile(props) {
         })
     }
 
+    // submit Handler
     const SubmitHandler = async (e) => {
         e.preventDefault();
         dispatch(userUpdateStart())
@@ -88,6 +90,50 @@ export default function Profile(props) {
         } catch (error) {
             dispatch(userUpdateFail(error.message));
             console.log(error.message);
+        }
+    }
+
+    // signout Handler
+    const signOutHandler = async (e) => {
+        e.preventDefault();
+        try {
+            dispatch(UserOutStart());
+
+            const res = await fetch(`/api/user/signout/${currentUser._id}`,{
+                method: 'DELETE',
+            })
+            const data = await res.json();
+            console.log(data);
+            if(data.success === false) {
+                dispatch(userOutFail(data.message));
+                return;
+            }
+            dispatch(userOutSuccess());
+            setFormData({});
+        } catch (error) {
+            dispatch(userOutFail(error.message));
+            console.log(error);
+        }
+    }
+
+    // Delete Handler
+    const deleteHandler = async (e)=>{
+        e.preventDefault();
+        try {
+            dispatch(UserOutStart());
+
+            const res = await fetch(`/api/user/delete/${currentUser._id}`, {
+                method: 'DELETE',
+            });
+            const data = await res.json();
+            console.log(data);
+            if(data.success === false) {
+                dispatch(userOutFail(data.message));
+                return;
+            }
+            dispatch(userOutSuccess());
+        } catch (error) {
+            dispatch(userOutFail(error.message));
         }
     }
 
@@ -117,7 +163,7 @@ export default function Profile(props) {
                 <input type="email" name='email' id='email' defaultValue={currentUser.email} onChange={changeHandler} placeholder='Email' autoComplete="email" className=' w-full rounded-lg p-3 my-2' />
                 <input type="password" name='password' id='password' defaultValue={currentUser.password} onChange={changeHandler} placeholder='Password' autoComplete="current-password" className=' w-full rounded-lg p-3 my-2' />
 
-                <button type='submit' className=' border-2 w-full border-sky-600  rounded-lg p-3 bg-sky-600 text-white  text-lg font-medium hover:text-sky-600 hover:bg-white transition-all relative z-10 my-2'>Update</button>
+                <button disabled={loading} type='submit' className=' border-2 w-full border-sky-600  rounded-lg p-3 bg-sky-600 text-white  text-lg font-medium hover:text-sky-600 hover:bg-white transition-all relative z-10 my-2'>{loading ? "Updating..." : "Update"}</button>
             </form>
 
             <p className=' text-base font-medium text-center text-red-600'>{error ? error : ''}</p>
@@ -125,8 +171,8 @@ export default function Profile(props) {
             <p className=' text-base font-medium text-center text-green-500'>{isUpdateSuccess ? "Your profile update successfully." : ''}</p>
 
             <div className='flex justify-between mt-5'>
-                <button className='bg-red-700 text-white p-3 rounded-lg border-2 border-red-700 hover:text-red-700 hover:bg-white transition-all'>Delete Account</button>
-                <button className='bg-red-700 text-white p-3 rounded-lg border-2 border-red-700 hover:text-red-700 hover:bg-white transition-all'>Sign Out</button>
+                <button className='bg-red-700 text-white p-3 rounded-lg border-2 border-red-700 hover:text-red-700 hover:bg-white transition-all' onClick={deleteHandler}>Delete Account</button>
+                <button className='bg-red-700 text-white p-3 rounded-lg border-2 border-red-700 hover:text-red-700 hover:bg-white transition-all' onClick={signOutHandler}>Sign Out</button>
             </div>
         </div>
     )
