@@ -34,7 +34,7 @@ export default function Signup(props) {
         // setLoading(true);
         dispatch(userCreateStart());
         try {
-            const res = await fetch('/api/user/signup', {
+            const res = await fetch('/api/auth/signup', {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

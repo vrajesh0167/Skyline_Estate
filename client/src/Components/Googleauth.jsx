@@ -9,19 +9,19 @@ export default function Googleauth() {
     const navigate = useNavigate();
 
     const dispatch = useDispatch();
+    const auth = getAuth(Firebase);
+    const provider = new GoogleAuthProvider();
 
     const submitHandler = async (e) => {
         e.preventDefault();
 
         try {
 
-            const auth = getAuth(Firebase);
-            const provider = new GoogleAuthProvider();
 
             const result = await signInWithPopup(auth, provider);
             console.log(result);
 
-            const res = await fetch("/api/user/google", {
+            const res = await fetch("/api/auth/google", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
