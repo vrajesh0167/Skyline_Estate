@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from "firebase/storage";
 import firebase from '../Firebase';
 import { UserOutStart, userOutFail, userOutSuccess, userUpdateFail, userUpdateStart, userUpdateSuccess } from '../Store/User/Userslice';
+import { Link } from 'react-router-dom'
 
 export default function Profile(props) {
     const setProgress = props.setProgress;
@@ -16,7 +17,7 @@ export default function Profile(props) {
     const [formData, setFormData] = useState({});
     // console.log(formData);
     const [isUpdateSuccess, setIsUpdateSuccess] = useState(false);
-    
+
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -99,12 +100,12 @@ export default function Profile(props) {
         try {
             dispatch(UserOutStart());
 
-            const res = await fetch(`/api/user/signout/${currentUser._id}`,{
+            const res = await fetch(`/api/user/signout/${currentUser._id}`, {
                 method: 'DELETE',
             })
             const data = await res.json();
             console.log(data);
-            if(data.success === false) {
+            if (data.success === false) {
                 dispatch(userOutFail(data.message));
                 return;
             }
@@ -117,7 +118,7 @@ export default function Profile(props) {
     }
 
     // Delete Handler
-    const deleteHandler = async (e)=>{
+    const deleteHandler = async (e) => {
         e.preventDefault();
         try {
             dispatch(UserOutStart());
@@ -127,7 +128,7 @@ export default function Profile(props) {
             });
             const data = await res.json();
             console.log(data);
-            if(data.success === false) {
+            if (data.success === false) {
                 dispatch(userOutFail(data.message));
                 return;
             }
@@ -165,6 +166,8 @@ export default function Profile(props) {
 
                 <button disabled={loading} type='submit' className=' border-2 w-full border-sky-600  rounded-lg p-3 bg-sky-600 text-white  text-lg font-medium hover:text-sky-600 hover:bg-white transition-all relative z-10 my-2'>{loading ? "Updating..." : "Update"}</button>
             </form>
+
+            <button className=' border-2 border-sky-600 w-full p-3 rounded-lg bg-sky-600 text-white text-lg font-medium hover:text-sky-600 hover:bg-white transition-all '><Link to={'/createListing'}>Create Listing</Link></button>
 
             <p className=' text-base font-medium text-center text-red-600'>{error ? error : ''}</p>
 
