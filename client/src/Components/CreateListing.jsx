@@ -25,7 +25,7 @@ export default function CreateListing(props) {
         discountPrice: 0,
 
     });
-    console.log(formData);
+    // console.log(formData);
     const [ImageUploadError, setImageUploaderror] = useState(false);
     const [uploading, setUploading] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -71,7 +71,7 @@ export default function CreateListing(props) {
             setImageUploaderror("You can upload 6 images per listing")
             setUploading(false);
         }
-    }
+    }   
 
     const storaImage = (file) => {
         return new Promise((resolve, reject) => {
@@ -242,7 +242,7 @@ export default function CreateListing(props) {
                             )}
                         </p>
 
-                        <button type='submit' onClick={ImagesUploadHandler} className=' p-3 text-lg font-semibold uppercase border-2 border-sky-600 bg-white text-sky-600 rounded-lg hover:bg-sky-600 hover:text-white transition-all'>{uploading ? "Uploading" : "Upload"}</button>
+                        <button disabled={uploading} type='submit' onClick={ImagesUploadHandler} className=' p-3 text-lg font-semibold uppercase border-2 border-sky-600 bg-white text-sky-600 rounded-lg hover:bg-sky-600 hover:text-white transition-all'>{uploading ? "Uploading" : "Upload"}</button>
                     </div>
                     <p className=' text-rose-600 font-semibold'>
                         {ImageUploadError ? (

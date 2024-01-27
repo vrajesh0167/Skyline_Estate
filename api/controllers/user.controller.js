@@ -4,7 +4,7 @@ import bcrypt from "bcrypt";
 
 // user Update Controller
 export const userUpdate = async (req, res) => {
-    console.log(req.params.id);
+    // console.log(req.params.id);
     if (req.user.id !== req.params.id) {
         return next(errorHandler(401, "You can only update your own account."));
     }

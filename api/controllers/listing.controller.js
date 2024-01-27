@@ -14,3 +14,15 @@ export const createListing = async (req, res, next) => {
         )
     }
 };
+
+export const getUserListing = async (req, res, next) =>{
+    if(req.user.id !== req.params.id){
+        return next(errorHandler(401,"please signin again."))
+    }
+    try {
+        const getlisting = await Listing.find({userRef: req.params.id});
+        return res.status(200).json(getlisting);
+    } catch (error) {
+        return next(errorHandler(401,"please signin again."))
+    }
+}
