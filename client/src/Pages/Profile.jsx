@@ -158,6 +158,24 @@ export default function Profile(props) {
         }
     }
 
+    const deleteListingHandler = async (listingId) =>{
+        try {
+            const res = await fetch(`/api/create/delete/${listingId}`,{
+                method: "DELETE",
+            });
+            const data = await res.json();
+            console.log(data);
+            if(data.success === false){
+                console.log(data.message);
+                return;
+            }
+
+            setUserListing((prev) => prev.filter((listing) => listing._id !== listingId))
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     return (
         <div className=' p-3 max-w-lg mx-auto shadow-xl rounded-lg'>
             <h1 className=' text-center my-7 text-3xl font-semibold text-slate-700'>Profile</h1>
@@ -218,8 +236,8 @@ export default function Profile(props) {
                                         <p>{listing.Name}</p>
                                     </Link>
                                     <div className=' flex flex-col gap-2'>
-                                        <button className=' py-1 px-2 bg-sky-600 text-white border border-sky-600 rounded-lg hover:text-sky-600 hover:bg-white transition-all'>Edit</button>
-                                        <button className=' py-1 px-2 bg-red-700 text-white border border-red-700 rounded-lg hover:text-red-700 hover:bg-white transition-all'>Delete</button>
+                                        <button  className=' py-1 px-2 bg-sky-600 text-white border border-sky-600 rounded-lg hover:text-sky-600 hover:bg-white transition-all'>Edit</button>
+                                        <button onClick={() => deleteListingHandler(listing._id)} className=' py-1 px-2 bg-red-700 text-white border border-red-700 rounded-lg hover:text-red-700 hover:bg-white transition-all'>Delete</button>
                                     </div>
                                 </div>
                             ))
