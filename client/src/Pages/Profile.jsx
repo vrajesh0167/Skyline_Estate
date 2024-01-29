@@ -158,14 +158,14 @@ export default function Profile(props) {
         }
     }
 
-    const deleteListingHandler = async (listingId) =>{
+    const deleteListingHandler = async (listingId) => {
         try {
-            const res = await fetch(`/api/create/delete/${listingId}`,{
+            const res = await fetch(`/api/create/delete/${listingId}`, {
                 method: "DELETE",
             });
             const data = await res.json();
             console.log(data);
-            if(data.success === false){
+            if (data.success === false) {
                 console.log(data.message);
                 return;
             }
@@ -236,7 +236,9 @@ export default function Profile(props) {
                                         <p>{listing.Name}</p>
                                     </Link>
                                     <div className=' flex flex-col gap-2'>
-                                        <button  className=' py-1 px-2 bg-sky-600 text-white border border-sky-600 rounded-lg hover:text-sky-600 hover:bg-white transition-all'>Edit</button>
+                                        <Link to={`/updateListing/${listing._id}`}>
+                                            <button className=' py-1 px-2 bg-sky-600 text-white border border-sky-600 rounded-lg hover:text-sky-600 hover:bg-white transition-all'>Edit</button>
+                                        </Link>
                                         <button onClick={() => deleteListingHandler(listing._id)} className=' py-1 px-2 bg-red-700 text-white border border-red-700 rounded-lg hover:text-red-700 hover:bg-white transition-all'>Delete</button>
                                     </div>
                                 </div>
