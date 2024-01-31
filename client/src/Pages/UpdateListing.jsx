@@ -44,7 +44,7 @@ export default function UpdateListing(props) {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const res = await fetch(`/api/create/editlisting/${id}`);
+                const res = await fetch(`/api/create/getlisting/${id}`);
                 const data = await res.json();
 
                 if (data.success === false) {
@@ -179,7 +179,7 @@ export default function UpdateListing(props) {
                 body: JSON.stringify(formData)
             });
             const data = await res.json();
-            console.log(data);
+            console.log(data.updateListing);
             if (data.success === false) {
                 setLoading(false);
                 setError(data.message);
@@ -187,7 +187,7 @@ export default function UpdateListing(props) {
             }
             setLoading(false);
             setError(false);
-            navigate(`/listing/${data._id}`);
+            navigate(`/listing/${data.updateListing._id}`);
         } catch (error) {
             console.log(error);
             setError(error);

@@ -1,0 +1,12 @@
+
+@media screen and (max-width:576px) {
+    .swiper-button-prev:after, .swiper-button-next:after {
+        font-family: swiper-icons;
+        font-size: var(--swiper-navigation-size);
+        text-transform: none !important;
+        letter-spacing: 0;
+        font-variant: initial;
+        line-height: 1;
+        font-size: 20px !important;
+    }
+}

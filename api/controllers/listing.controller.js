@@ -84,7 +84,7 @@ export const updateUserListing = async (req, res, next) => {
 
 // get edit listing
 export const getEditListing = async (req, res, next) =>{
-    console.log(req.params.id);
+    // console.log(req.params.id);
     try {
         const getEditListing = await Listing.findById(req.params.id);
 

@@ -7,6 +7,7 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { Store, persistor } from './Store/Store.js'
 import { PersistGate } from 'redux-persist/integration/react'
+import '@icon/icofont/icofont.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Router>
