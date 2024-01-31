@@ -235,7 +235,7 @@ export default function Profile(props) {
                                     <Link to={`/listing/${listing._id}`} className=' flex-1 text-lg font-semibold text-slate-700 ms-2 truncate'>
                                         <p>{listing.Name}</p>
                                     </Link>
-                                    <div className=' flex flex-col gap-2'>
+                                    <div className=' flex flex-col gap-2 text-center'>
                                         <Link to={`/updateListing/${listing._id}`}>
                                             <button className=' py-1 px-2 bg-sky-600 text-white border border-sky-600 rounded-lg hover:text-sky-600 hover:bg-white transition-all'>Edit</button>
                                         </Link>

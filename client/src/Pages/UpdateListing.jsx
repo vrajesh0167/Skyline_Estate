@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from "firebase/storage";
 import firebase from '../Firebase'
-import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 
 
@@ -55,7 +54,7 @@ export default function UpdateListing(props) {
                     ...formData,
                     imageUrls: data.imageUrls,
                     Name: data.Name,
-                    description: data.description,
+                    description: data.description,    
                     address: data.address,
                     type: data.type,
                     parking: data.parking,
