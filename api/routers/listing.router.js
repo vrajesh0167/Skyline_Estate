@@ -3,6 +3,7 @@ import { verifyToken } from "../utils/verifyToken.js";
 import {
     createListing,
     deleteUserListing,
+    getAllListings,
     getEditListing,
     getUserListing,
     updateUserListing,
@@ -15,5 +16,6 @@ router.get("/listings/:id", verifyToken, getUserListing);
 router.delete("/delete/:id", verifyToken, deleteUserListing);
 router.put("/update/:id", updateUserListing);
 router.get("/getlisting/:id", getEditListing);
+router.get('/allListing', getAllListings);
 
 export default router;

@@ -4,7 +4,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/effect-fade';    
 import { useParams } from 'react-router-dom';
-import { EffectFade, Navigation, Pagination } from 'swiper/modules';
+import { EffectFade, Navigation, Autoplay } from 'swiper/modules';
 
 
 export default function Listing(props) {
@@ -12,7 +12,7 @@ export default function Listing(props) {
     const { id } = useParams();
     const [error, setError] = useState(false);
     const [listing, setListing] = useState(null);
-    console.log(listing);
+    // console.log(listing);
 
     const DisLestPrice = Number(listing && listing.regularPrice) - Number(listing && listing.discountPrice);
 
@@ -51,7 +51,7 @@ export default function Listing(props) {
                     <p className=' text-rose-600 font-semibold'>{error}</p>
                 ) : listing !== null ? (
                     <div>
-                        <Swiper navigation={true} loop={true} effect={'fade'} modules={[EffectFade, Navigation, Pagination]} >
+                        <Swiper navigation={true} loop={true} effect={'fade'}  autoplay={{ delay: 3000, pauseOnMouseEnter: true }} modules={[EffectFade, Navigation, Autoplay]} >
                             {
                                 listing.imageUrls.map((url) => (
                                     <SwiperSlide key={url}>
@@ -81,7 +81,7 @@ export default function Listing(props) {
                                 <p className=' text-lg text-slate-600 font-semibold mt-2'>Description - <span className=' font-normal'>{listing.description}</span></p>
                                 <ul className=' flex gap-4 flex-wrap'>
                                     <li className=' text-lg font-semibold text-slate-600'><i className="ri-hotel-bed-fill text-green-700 text-lg"></i> {listing.bedrooms} Bed</li>
-                                    <li className=' text-lg font-semibold text-slate-600'><i className="icofont icofont-bathtub text-green-700 text-xl"></i> {listing.bathrooms} bath</li>
+                                    <li className=' text-lg font-semibold text-slate-600'><i className="icofont icofont-bathtub text-green-700 text-xl"></i> {listing.bathrooms} Bath</li>
                                     <li className=' text-lg font-semibold text-slate-600'><i class="ri-parking-box-line text-green-700 text-xl"></i> {listing.parking} { listing.parking === true ? 'Parking Shot' : 'Not Parking shot'}</li>
                                     <li className=' text-lg font-semibold text-slate-600'><i class="ri-sofa-fill text-green-700 text-xl"></i> {listing.furnished} { listing.furnished === true ? 'Furnished' : 'Not Furnished'}</li>
                                 </ul>

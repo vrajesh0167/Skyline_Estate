@@ -148,7 +148,7 @@ export default function CreateListing(props) {
                 })
             });
             const data = await res.json();
-            console.log(data);
+            console.log(data.listing);
             if(data.success === false) {
                 setLoading(false);
                 setError(data.message);
@@ -156,7 +156,7 @@ export default function CreateListing(props) {
             }
             setLoading(false);
             setError(false);
-            navigate(`/listing/${data._id}`);
+            navigate(`/listing/${data.listing._id}`);
         } catch (error) {
             console.log(error);
             setError(error);

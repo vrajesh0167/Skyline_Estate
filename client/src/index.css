@@ -16,6 +16,13 @@ h1{
     font-family: 'Poppins', sans-serif;
 }
 
+hr{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: 0;
+    border-top: 2px solid rgba(0,0,0,.125);
+}
+
 header .nav-link.active::before {
     transform: scale(1);
     transform-origin: left;
