@@ -39,7 +39,7 @@ export default function Cart(props) {
                     <span className='username py-1 px-4 font-semibold'> {username}</span>
                 </div>
             </div>
-            <div>
+            <div className=' p-4 shadow-lg rounded-b-lg'>
                 <p className=' text-base font-semibold text-slate-600 mt-3'><i className="ri-map-pin-fill text-lg text-green-600" /> {address}</p>
                 <h2 className=' text-3xl font-bold text-slate-600 mb-3 '>
                     <Link to={`/listing/${_id}`} className=' relative'>{Name}</Link>

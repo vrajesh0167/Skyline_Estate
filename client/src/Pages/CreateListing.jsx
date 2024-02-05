@@ -209,7 +209,7 @@ export default function CreateListing(props) {
                                 <p>Regular Price</p>
                                 {
                                     formData.type === 'rent' ? (
-                                        <span className=' text-xs'>($ / Month)</span>
+                                        <span className=' text-xs'>($ / Year)</span>
                                     ) : ('')
                                 }
                             </div>
@@ -220,7 +220,7 @@ export default function CreateListing(props) {
                                     <input type="number" id='discountPrice' name='discountPrice' min={0} max={100} required className=' border-2 border-gray-300 p-3 rounded-lg' value={formData.discountPrice} onChange={changeHandler} />
                                     <div className=' flex flex-col items-center'>
                                         <p>Discounted Price</p>
-                                        <span className=' text-xs'>($ / Month)</span>
+                                        <span className=' text-xs'>($ / Year)</span>
                                     </div>
                                 </div>
                             ) : ('')

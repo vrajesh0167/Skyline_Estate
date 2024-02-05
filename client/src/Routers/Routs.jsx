@@ -10,6 +10,7 @@ import PrivateRouter from '../Components/PrivateRouter'
 import CreateListing from '../Pages/CreateListing'
 import UpdateListing from '../Pages/UpdateListing'
 import Listing from '../Pages/Listing'
+import SearchingListing from '../Pages/SearchingListing'
 
 export default function Routs() {
     const [progress, setProgress] = useState(0)
@@ -29,6 +30,7 @@ export default function Routs() {
                 <Route path="/signin" element={<Signin setProgress={setProgress}/>} />
                 <Route path='/signup' element={<Signup setProgress={setProgress}/>}></Route>
                 <Route path='/listing/:id' element={<Listing setProgress={setProgress}></Listing>}></Route>
+                <Route path='/searchingListing' element={<SearchingListing setProgress={setProgress}></SearchingListing>}></Route>
                 <Route element={<PrivateRouter></PrivateRouter>}>
                     <Route path='/profile' element={<Profile setProgress={setProgress}></Profile>}></Route>
                     <Route path='/createListing' element={<CreateListing setProgress={setProgress}></CreateListing>}></Route>

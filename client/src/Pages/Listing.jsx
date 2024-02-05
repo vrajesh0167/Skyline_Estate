@@ -65,7 +65,7 @@ export default function Listing(props) {
                                 <h2 className=' text-3xl font-bold text-slate-600'>
                                     {capitalizeFirstLetter(listing.Name)} <span>- ${DisLestPrice}</span> {
                                         listing.type === 'rent' ? (
-                                            <span className=' text-lg'>/ Month</span>
+                                            <span className=' text-lg'>/ Year</span>
                                         ) : ('')
                                     }
                                 </h2>

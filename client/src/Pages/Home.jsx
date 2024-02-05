@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { Link, } from 'react-router-dom'
-import { useSelector } from 'react-redux';
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import 'swiper/css/effect-fade';
@@ -12,14 +11,11 @@ import homeRev2 from '../assets/images/home-rev-img-2.jpg';
 import homeRev3 from '../assets/images/home-rev-img-3.jpg';
 import homeRev4 from '../assets/images/home-rev-img-4.jpg';
 import homeRev5 from '../assets/images/home_img_2.png';
-// import property1 from '../assets/images/main-home-property.jpg';
-// import property2 from '../assets/images/main-home-property2.jpg';
-// import property3 from '../assets/images/main-home-property3.jpg';
+import homeRev6 from '../assets/images/main-home-img-1.jpg';
 import Cart from '../Components/Cart';
 
 export default function Home(props) {
   const setProgress = props.setProgress;
-  const { currentUser } = useSelector((state) => state.user);
   const [listingData, setListingData] = useState([]);
   // console.log(listingData);
 
@@ -32,8 +28,10 @@ export default function Home(props) {
           console.log(data.message);
           return;
         }
-        console.log('listing :- ', data);
-        setListingData(data);
+        // console.log('listing :- ', data);
+        // Slice the first 4 items from the data array
+        const slicedData = data.listings.slice(0, );
+        setListingData({ ...data, listings: slicedData });
       } catch (error) {
         console.log("getAllListing failed :- ", error);
       } finally {
@@ -81,7 +79,7 @@ export default function Home(props) {
             <div className=' flex flex-col gap-5 text-center'>
               <h1 className=' my-7 text-3xl lg:text-5xl 2xl:text-6xl font-extrabold text-gray-300 drop-shadow-lg  '>Find your next <span className=' text-gray-400'>perfect</span><br className=' md:block hidden' />place with ease</h1>
               <p className=' text-gray-200 text-sm sm:text-lg font-semibold'>Sahand Estate will help you find your home fast, easy and comfortable. <br className=' md:block hidden' /> Our expert support are always available.</p>
-              <Link className='text-sm sm:text-lg font-bold'>
+              <Link to={'/searchingListing'} className='text-sm sm:text-lg font-bold'>
                 <button className=' bg-slate-600 text-gray-300 py-2 px-5 border-2 border-slate-600 rounded-lg hover:bg-white hover:text-slate-600 transition-all'>Let's Start now...</button>
               </Link>
             </div>
@@ -90,19 +88,37 @@ export default function Home(props) {
       </div>
 
       {/* real estate section (Home_section2) */}
-      <div className='home_section2 my-24 container mx-auto'>
+      <div className='my-24 container mx-auto'>
         <div className=' mb-12'>
           <h2 className=' text-3xl xl:text-5xl font-semibold text-slate-600'>Our choice of <br className=' lg:block hidden' /> popular <span className=' font-bold text-gray-700'>real estate</span></h2>
         </div>
-        <div className=' grid grid-cols-3 grid-rows-subgrid gap-4'>
-          {/* <div className=' estate'> */}
+        <div className=' real_estate grid grid-flow-row grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5'>
           {
             Array.isArray(listingData.listings) &&
             listingData.listings.map((item) => (
               <Cart key={item._id} listing={item} user={listingData.user}></Cart>
             ))
           }
-          {/* </div> */}
+        </div>
+      </div>
+
+      {/* home_section3 */}
+      <div className=' home_section3 py-24  lg:ps-20 px-10 container mx-auto'>
+        <div className=' grid grid-cols-1 lg:grid-cols-2 grid-flow-row'>
+          <div className='home_img relative'>
+            <img src={homeRev6} alt="homerev-6" className=' object-cover rounded-lg relative z-10 h-full' />
+            {/* <div className='home_img relative'></div> */}
+          </div>
+          <div className=' ps-12 lg:pt-0 pt-14'>
+            <h2 className=' text-3xl xl:text-5xl font-semibold text-slate-600'>Modern spaces and <br className=' lg:block hidden' /><span className=' font-bold text-gray-700'>premium</span> design</h2>
+            <p className=' text-lg font-normal text-gray-500 mt-8'>Lorem ipsum dolor sit amet, minimum inimicus quo no, at vix primis viderere vituperatoribus. In corpora argumentum.</p>
+            <ul className=' mt-8'>
+              <li className=' text-lg font-normal text-gray-500'><i className="ri-arrow-right-double-fill"></i> Mea omnium explicari</li>
+              <li className=' text-lg font-normal text-gray-500'><i className="ri-arrow-right-double-fill"></i> His no legere feugaitoer</li>
+              <li className=' text-lg font-normal text-gray-500'><i className="ri-arrow-right-double-fill"></i> illum idquem</li>
+            </ul>
+            <button className=' bg-yellow-400 border-2 border-yellow-400 mt-8 py-3 px-5 rounded-lg text-lg font-semibold text-white hover:text-yellow-400 hover:bg-white transition-all'>Search Property</button>
+          </div>
         </div>
       </div>
     </div>
