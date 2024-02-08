@@ -44,10 +44,10 @@ export default function Cart(props) {
                 <h2 className=' text-3xl font-bold text-slate-600 mb-3 '>
                     <Link to={`/listing/${_id}`} className=' relative'>{Name}</Link>
                 </h2>
-                <p className=' text-lg font-normal text-gray-500'>{description}</p>
+                <p className=' text-lg font-normal text-gray-500 line-clamp-3'>{description}</p>
                 <hr className=' border-1 text-slate-800' />
                 <div className=' flex justify-between'>
-                    <h3 className=' text-3xl font-semibold'>{DisLestPrice}$</h3>
+                    <h3 className=' text-3xl font-semibold'>{DisLestPrice.toLocaleString('en-US')}$</h3>
                     <div>
                         <ul className=' flex gap-4 flex-wrap'>
                             <li className=' text-lg font-semibold text-slate-600'><i className="ri-hotel-bed-fill text-green-700 text-lg"></i>{bedrooms}  Bed</li>

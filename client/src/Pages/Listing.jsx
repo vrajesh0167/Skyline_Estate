@@ -63,7 +63,7 @@ export default function Listing(props) {
                         <div className=' max-w-4xl mx-auto flex flex-col p-5 mt-9 shadow-xl rounded-lg'>
                             <div >
                                 <h2 className=' text-3xl font-bold text-slate-600'>
-                                    {capitalizeFirstLetter(listing.Name)} <span>- ${DisLestPrice}</span> {
+                                    {capitalizeFirstLetter(listing.Name)} <span>- ${DisLestPrice.toLocaleString('en-US')}</span> {
                                         listing.type === 'rent' ? (
                                             <span className=' text-lg'>/ Year</span>
                                         ) : ('')
@@ -82,8 +82,8 @@ export default function Listing(props) {
                                 <ul className=' flex gap-4 flex-wrap'>
                                     <li className=' text-lg font-semibold text-slate-600'><i className="ri-hotel-bed-fill text-green-700 text-lg"></i> {listing.bedrooms} Bed</li>
                                     <li className=' text-lg font-semibold text-slate-600'><i className="icofont icofont-bathtub text-green-700 text-xl"></i> {listing.bathrooms} Bath</li>
-                                    <li className=' text-lg font-semibold text-slate-600'><i class="ri-parking-box-line text-green-700 text-xl"></i> {listing.parking} { listing.parking === true ? 'Parking Shot' : 'Not Parking shot'}</li>
-                                    <li className=' text-lg font-semibold text-slate-600'><i class="ri-sofa-fill text-green-700 text-xl"></i> {listing.furnished} { listing.furnished === true ? 'Furnished' : 'Not Furnished'}</li>
+                                    <li className=' text-lg font-semibold text-slate-600'><i className="ri-parking-box-line text-green-700 text-xl"></i> {listing.parking} { listing.parking === true ? 'Parking Shot' : 'Not Parking shot'}</li>
+                                    <li className=' text-lg font-semibold text-slate-600'><i className="ri-sofa-fill text-green-700 text-xl"></i> {listing.furnished} { listing.furnished === true ? 'Furnished' : 'Not Furnished'}</li>
                                 </ul>
                             </div>
                         </div>

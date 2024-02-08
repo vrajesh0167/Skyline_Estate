@@ -6,6 +6,7 @@ import {
     getAllListings,
     getEditListing,
     getUserListing,
+    searchListing,
     updateUserListing,
 } from "../controllers/listing.controller.js";
 
@@ -17,5 +18,6 @@ router.delete("/delete/:id", verifyToken, deleteUserListing);
 router.put("/update/:id", updateUserListing);
 router.get("/getlisting/:id", getEditListing);
 router.get('/allListing', getAllListings);
+router.get('/searchlistings', searchListing);
 
 export default router;

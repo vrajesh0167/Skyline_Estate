@@ -30,7 +30,7 @@ export default function Home(props) {
         }
         // console.log('listing :- ', data);
         // Slice the first 4 items from the data array
-        const slicedData = data.listings.slice(0, );
+        const slicedData = data.listings.slice(0,);
         setListingData({ ...data, listings: slicedData });
       } catch (error) {
         console.log("getAllListing failed :- ", error);
@@ -100,6 +100,11 @@ export default function Home(props) {
             ))
           }
         </div>
+        <div className=' text-center mt-14'>
+          <Link to={'/searchingListing'}>
+            <button className=' bg-sky-600 text-white text-lg font-semibold py-3 px-5 rounded-lg border-2 border-sky-600 hover:bg-white hover:text-sky-600 transition-all'>Browse More Properties</button>
+          </Link>
+        </div>
       </div>
 
       {/* home_section3 */}
@@ -117,10 +122,58 @@ export default function Home(props) {
               <li className=' text-lg font-normal text-gray-500'><i className="ri-arrow-right-double-fill"></i> His no legere feugaitoer</li>
               <li className=' text-lg font-normal text-gray-500'><i className="ri-arrow-right-double-fill"></i> illum idquem</li>
             </ul>
-            <button className=' bg-yellow-400 border-2 border-yellow-400 mt-8 py-3 px-5 rounded-lg text-lg font-semibold text-white hover:text-yellow-400 hover:bg-white transition-all'>Search Property</button>
+            <Link to={'/searchingListing'}>
+              <button className=' bg-yellow-400 border-2 border-yellow-400 mt-8 py-3 px-5 rounded-lg text-lg font-semibold text-white hover:text-yellow-400 hover:bg-white transition-all'>Search Property</button>
+            </Link>
           </div>
         </div>
       </div>
+
+      {/* home_section4 */}
+      <div className=' container py-24 mx-auto'>
+        <div className=' mb-16'>
+          <h2 className=' text-3xl xl:text-5xl font-semibold text-slate-600'>How It works? <br className=' lg:block hidden' /> Find a <span className=' font-bold text-gray-700'>perfect home</span></h2>
+        </div>
+        <div className=' grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4'>
+          <div className=' pe-5 pb-2 flex flex-col items-end w-full '>
+            <div className=' w-80 min-w-56'>
+              <div>
+                <i className="ri-home-office-fill text-5xl text-slate-700"></i>
+              </div>
+              <h3 className=' mt-4 text-2xl font-bold text-slate-600'>Find real estate</h3>
+              <p className=' text-lg font-normal text-gray-500 mt-1'>Sumo petentium ut per, at his wisim utinam adipiscing. Est ei graeco quod suavitate vix.</p>
+            </div>
+          </div>
+          <div className=' pe-5 pb-2 flex flex-col items-start w-full border-e-2 '>
+            <div className=' w-80 min-w-56'>
+              <div>
+                <i className="icofont icofont-home text-5xl text-slate-700"></i>
+              </div>
+              <h3 className=' mt-4 text-2xl font-bold text-slate-600'>Meet relator</h3>
+              <p className=' text-lg font-normal text-gray-500 mt-1'>Sumo petentium ut per, at his wisim utinam adipiscing. Est ei graeco quod suavitate vix.</p>
+            </div>
+          </div>
+          <div className=' pe-5 pb-2 flex flex-col items-end w-full border-e-2 '>
+            <div className=' w-80 min-w-56'>
+              <div>
+                <i className="ri-file-text-line text-5xl text-slate-700"></i>
+              </div>
+              <h3 className=' mt-4 text-2xl font-bold text-slate-600'>Documents</h3>
+              <p className=' text-lg font-normal text-gray-500 mt-1'>Sumo petentium ut per, at his wisim utinam adipiscing. Est ei graeco quod suavitate vix.</p>
+            </div>
+          </div>
+          <div className=' pe-5 pb-2 flex flex-col items-end w-full border-e-2 '>
+            <div className=' w-80 min-w-56'>
+              <div>
+                <i className="icofont icofont-key text-5xl text-slate-700"></i>
+              </div>
+              <h3 className=' mt-4 text-2xl font-bold text-slate-600'>Take the keys</h3>
+              <p className=' text-lg font-normal text-gray-500 mt-1'>Sumo petentium ut per, at his wisim utinam adipiscing. Est ei graeco quod suavitate vix.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   )
 }
