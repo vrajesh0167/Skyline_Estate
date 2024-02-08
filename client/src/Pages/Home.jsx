@@ -134,18 +134,18 @@ export default function Home(props) {
         <div className=' mb-16'>
           <h2 className=' text-3xl xl:text-5xl font-semibold text-slate-600'>How It works? <br className=' lg:block hidden' /> Find a <span className=' font-bold text-gray-700'>perfect home</span></h2>
         </div>
-        <div className=' grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4'>
-          <div className=' pe-5 pb-2 flex flex-col items-end w-full '>
-            <div className=' w-80 min-w-56'>
+        <div className=' grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4'>
+          <div className=' pe-5 pb-2 flex flex-col items-end md:border-e-2 border-gray-400 '>
+            <div className=''>
               <div>
-                <i className="ri-home-office-fill text-5xl text-slate-700"></i>
+                <i className="ri-home-office-fill text-5xl text-slate-700 "></i>
               </div>
               <h3 className=' mt-4 text-2xl font-bold text-slate-600'>Find real estate</h3>
               <p className=' text-lg font-normal text-gray-500 mt-1'>Sumo petentium ut per, at his wisim utinam adipiscing. Est ei graeco quod suavitate vix.</p>
             </div>
           </div>
-          <div className=' pe-5 pb-2 flex flex-col items-start w-full border-e-2 '>
-            <div className=' w-80 min-w-56'>
+          <div className=' pe-5 pb-2 flex flex-col items-end lg:border-e-2 border-gray-400'>
+            <div className=''>
               <div>
                 <i className="icofont icofont-home text-5xl text-slate-700"></i>
               </div>
@@ -153,8 +153,8 @@ export default function Home(props) {
               <p className=' text-lg font-normal text-gray-500 mt-1'>Sumo petentium ut per, at his wisim utinam adipiscing. Est ei graeco quod suavitate vix.</p>
             </div>
           </div>
-          <div className=' pe-5 pb-2 flex flex-col items-end w-full border-e-2 '>
-            <div className=' w-80 min-w-56'>
+          <div className=' pe-5 pb-2 flex flex-col items-end md:border-e-2 border-gray-400'>
+            <div className=''>
               <div>
                 <i className="ri-file-text-line text-5xl text-slate-700"></i>
               </div>
@@ -162,8 +162,8 @@ export default function Home(props) {
               <p className=' text-lg font-normal text-gray-500 mt-1'>Sumo petentium ut per, at his wisim utinam adipiscing. Est ei graeco quod suavitate vix.</p>
             </div>
           </div>
-          <div className=' pe-5 pb-2 flex flex-col items-end w-full border-e-2 '>
-            <div className=' w-80 min-w-56'>
+          <div className=' pe-5 pb-2 flex flex-col items-end'>
+            <div className=' '>
               <div>
                 <i className="icofont icofont-key text-5xl text-slate-700"></i>
               </div>
