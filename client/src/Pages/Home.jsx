@@ -16,9 +16,11 @@ import homeRev6 from '../assets/images/main-home-img-1.jpg';
 // home section 5 icons
 import homePlan from '../assets/images/town-plan.png';
 import renovation from '../assets/images/renovation.png';
-import homeMain4 from '../assets/images/main-home-img-4.jpg'
-import homeMain5 from '../assets/images/main-home-img-5.jpg'
-import homeMain6 from '../assets/images/main-home-img-6.jpg'
+import homeMain4 from '../assets/images/main-home-img-4.jpg';
+import homeMain5 from '../assets/images/main-home-img-5.jpg';
+import homeMain6 from '../assets/images/main-home-img-6.jpg';
+// home section 6 images
+import homeRev7 from '../assets/images/main-home-img-2.jpg';
 
 export default function Home(props) {
   const setProgress = props.setProgress;
@@ -171,7 +173,6 @@ export default function Home(props) {
         <div className=' grid grid-cols-1 lg:grid-cols-2 grid-flow-row'>
           <div className='home_img relative'>
             <img src={homeRev6} alt="homerev-6" className=' object-cover rounded-lg relative z-10 h-full' />
-            {/* <div className='home_img relative'></div> */}
           </div>
           <div className=' ps-12 lg:pt-0 pt-14'>
             <h2 className=' text-3xl xl:text-5xl font-semibold text-slate-600'>Modern spaces and <br className=' lg:block hidden' /><span className=' font-bold text-gray-700'>premium</span> design</h2>
@@ -276,13 +277,13 @@ export default function Home(props) {
       </div>
 
       {/* home section 5 */}
-      <div className=' home_section5 container mx-auto py-24'>
+      <div className=' container mx-auto py-24'>
         <div className=' grid lg:grid-cols-2 grid-cols-1 row-auto lg:gap-5 gap-8'>
           <div className=' pe-28'>
             <div className=' flex flex-col justify-center'>
               <div className=' mb-5'>
                 <div className=' mb-10'>
-                  <h1 className=' text-5xl xl:text-5xl font-semibold text-slate-600'>Our expert will help you <br className=' lg:block hidden'/> make <span className=' font-bold text-gray-700'> the renovation</span></h1>
+                  <h1 className=' text-5xl xl:text-5xl font-semibold text-slate-600'>Our expert will help you <br className=' lg:block hidden' /> make <span className=' font-bold text-gray-700'> the renovation</span></h1>
                 </div>
               </div>
 
@@ -297,7 +298,6 @@ export default function Home(props) {
               </div>
               <div className=' flex flex-col sm:flex-row items-start sm:items-center gap-4 mt-5 mb-10'>
                 <div>
-                  {/* <i className="ri-home-office-fill text-5xl text-slate-700 "></i> */}
                   <img src={homePlan} alt="home plan" className=' object-cover to-slate-700' />
                 </div>
                 <div>
@@ -307,7 +307,6 @@ export default function Home(props) {
               </div>
               <div className=' flex flex-col sm:flex-row items-start sm:items-center gap-4 mt-5 mb-10'>
                 <div>
-                  {/* <i className="ri-home-office-fill text-5xl text-slate-700 "></i> */}
                   <img src={renovation} alt="home plan" className=' object-cover to-slate-700' />
                 </div>
                 <div>
@@ -320,19 +319,35 @@ export default function Home(props) {
 
           <div className=' grid md:grid-cols-2 grid-cols-1 grid-flow-row md:grid-rows-2 gap-5 md:p-10'>
             <div className=' md:row-start-1 md:row-span-2 md:col-start-1 md:col-span-1 md:flex md:items-center md:justify-center'>
-                <img src={homeMain4} alt='home main img 4' className=' object-cover rounded-lg w-full md:h-5/6 h-full' />
+              <img src={homeMain4} alt='home main img 4' className=' object-cover rounded-lg w-full md:h-5/6 h-full' />
             </div>
             <div className=' md:row-start-1 md:row-span-1 md:col-start-2 md:col-span-1'>
-                <img src={homeMain5} alt='home main img 5' className=' object-cover rounded-lg h-full w-full' />
+              <img src={homeMain5} alt='home main img 5' className=' object-cover rounded-lg h-full w-full' />
             </div>
             <div className=' md:row-start-2 md:row-span-1 md:col-start-2 md:col-span-1'>
-                <img src={homeMain6} alt='home main img 6' className=' object-cover rounded-lg h-full w-full' />
+              <img src={homeMain6} alt='home main img 6' className=' object-cover rounded-lg h-full w-full' />
             </div>
           </div>
 
         </div>
       </div>
 
+      {/* home_section6 */}
+      <div className=' home_section6 py-24  lg:ps-20 px-10 container mx-auto'>
+        <div className=' grid grid-cols-1 lg:grid-cols-2 grid-flow-row'>
+          <div className='home_img relative'>
+            <img src={homeRev7} alt="homerev-6" className=' object-cover rounded-lg relative z-10 h-full' />
+          </div>
+          <div className=' flex flex-col justify-center ps-12 lg:pt-0 pt-14'>
+            <h2 className=' text-3xl xl:text-5xl font-semibold text-slate-600'>Explore your home <br className=' lg:block hidden' /><span className=' font-bold text-gray-700'>loan options</span></h2>
+            <p className=' text-lg font-normal text-gray-500 mt-8'>Lorem ipsum dolor sit amet, minimum inimicus quo no, at vix primis viderere vituperatoribus. In corpora argumentum. Vix ferri dicam contentiones ne, ex appetere salutatus</p>
+
+            <Link to={'/searchingListing'}>
+              <button className=' bg-yellow-400 border-2 border-yellow-400 mt-8 py-3 px-5 rounded-lg text-lg font-semibold text-white hover:text-yellow-400 hover:bg-white transition-all'>Search Property</button>
+            </Link>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }

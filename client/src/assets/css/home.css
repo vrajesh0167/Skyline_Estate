@@ -21,8 +21,8 @@
     }
 }
 
-/* home_section 3 */
-.home_section3 {
+/* home_section 3 && home_section 6 */
+.home_section3, .home_section6 {
     background-color: #edf9f9;
     background-image: url(../images/main-home-bg-img-new.png);
     background-position: bottom right;
@@ -30,11 +30,13 @@
     background-size: auto;
 }
 
-.home_section3 .home_img {
+.home_section3 .home_img ,
+.home_section6 .home_img {
     position: relative;
 }
 
-.home_section3 .home_img::after {
+.home_section3 .home_img::after ,
+.home_section6 .home_img::after {
     content: "";
     position: absolute;
     top: 0;
@@ -47,7 +49,8 @@
     border-radius: 0.5rem;
 }
 
-.home_section3 .home_img:hover::after {
+.home_section3 .home_img:hover::after ,
+.home_section6 .home_img:hover::after {
     transform: translate(-14px, 14px);
     /* Add additional styles for the hover effect here */
     /* For example, you can change the background color or add opacity */
