@@ -55,4 +55,16 @@
     opacity: 0.8;
 }
 
-/* #edf9f9; */
+/* home_section4 */
+.home_section4{
+    background-image: url(../images/main-home-img-3.jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+.home_section4 .formdiv{
+    backdrop-filter: blur(28px) brightness(130%);
+    background-color: rgba(255,255,255,.66);
+    padding: 40px 48px ;
+}
