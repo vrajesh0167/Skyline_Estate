@@ -35,6 +35,10 @@ export default function Home(props) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [enquirySuccess, setEnquirySuccess] = useState(false);
+  const [newslatter, setNewslatter] = useState('');
+  const [newslatterSuccess, setNewslatterSuccess] = useState(false);
+  const [newslatterError, setNewslatterError] = useState(null);
+  const [uploading, setUploading] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -61,6 +65,7 @@ export default function Home(props) {
     fetchData();
   }, []);
 
+  // enquiry for this
   const onchangeHandler = (e) => {
     setFormData({
       ...formData,
@@ -70,10 +75,10 @@ export default function Home(props) {
 
   const enquirySubmitHandler = async (e) => {
     e.preventDefault();
-    setLoading(true);
     if (formData.name === '' && formData.email === '' && formData.phone === '') {
       return setFormDataError('Please fill out this field.');
     }
+    setLoading(true);
     try {
       const res = await fetch('/api/enquiry/enquiryregister', {
         method: "POST",
@@ -102,6 +107,40 @@ export default function Home(props) {
     } catch (error) {
       setError(error);
       setLoading(false);
+    }
+  }
+
+  //sign to newslatter
+  const newsLatterHandler = async (e) => {
+    e.preventDefault();
+    if (newslatter === '') {
+      return setNewslatterError('Please fill out this field.');
+    }
+    setUploading(true);
+    try {
+      const res = await fetch('/api/newslatter/signup', {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ email: newslatter })
+      });
+      const data = await res.json();
+      // console.log(data);
+      if (data.success === false) {
+        setError(data.message);
+        setUploading(false);
+        return;
+      }
+      setTimeout(() => {
+        setNewslatter(data);
+        setNewslatterSuccess(true);
+        setUploading(false);
+        setNewslatter('');
+      }, 2000);
+    } catch (error) {
+      setError(error);
+      setUploading(false);
     }
   }
 
@@ -240,7 +279,7 @@ export default function Home(props) {
           <div className=' grid lg:grid-cols-2 grid-cols-1 grid-rows-1 lg:gap-0 gap-5 lg:p-0 p-5'>
             <div className=' lg:pe-24'>
               <div className=' flex flex-col items-center lg:items-start lg:justify-center h-full'>
-                <h2 className=' mb-3 text-5xl 2xl:text-6xl font-semibold text-white '>Discover a new <br className=' hidden lg:block' /> way of living</h2>
+                <h2 className=' mb-3 text-5xl 2xl:text-7xl font-semibold text-white '>Discover a new <br className=' hidden lg:block' /> way of living</h2>
                 <p className=' text-white text-sm sm:text-lg font-semibold'>* Feugait scriptorem qui ea, quo admodum eloquentiam eu. Te malis tibique eum. Ne magna assum everti.</p>
               </div>
             </div>
@@ -269,7 +308,7 @@ export default function Home(props) {
               {enquirySuccess ? (
                 <div className=' bg-orange-500 mt-4 p-3 rounded-md text-lg text-white'>Thank you for your message. It has been sent.</div>
               ) : error !== null ? (
-                <div className=' bg-orange-500 mt-4 p-3 rounded-md text-lg text-white'>Thank you for your message. It has been sent.</div>
+                <div className=' bg-orange-500 mt-4 p-3 rounded-md text-lg text-white'>{error}</div>
               ) : null}
             </div>
           </div>
@@ -345,6 +384,40 @@ export default function Home(props) {
             <Link to={'/searchingListing'}>
               <button className=' bg-yellow-400 border-2 border-yellow-400 mt-8 py-3 px-5 rounded-lg text-lg font-semibold text-white hover:text-yellow-400 hover:bg-white transition-all'>Search Property</button>
             </Link>
+          </div>
+        </div>
+      </div>
+
+      {/* home_section 7 */}
+      <div className=' mx-4 home_section7 py-44 rounded-lg'>
+        <div className=' container mx-auto'>
+          <div className=' grid lg:grid-cols-2 grid-cols-1 grid-rows-1 lg:gap-0 gap-5 lg:p-0 p-5'>
+            <div className=' lg:pe-24'>
+              <div className=' flex flex-col items-center lg:items-start lg:justify-center h-full'>
+                <h2 className=' mb-4 text-5xl 2xl:text-7xl font-semibold text-white '>Find a home that <br className=' hidden lg:block' /> truly suits you</h2>
+                <p className=' text-white text-sm sm:text-lg font-semibold'>* Feugait scriptorem qui ea, quo admodum lorem.</p>
+              </div>
+            </div>
+            <div className=' lg:ps-24 lg:pe-11'>
+              <div className=' formdiv rounded-lg'>
+                <h3 className=' text-3xl font-semibold text-gray-700 '>Sign to newsletter</h3>
+                <p className=' mt-2 mb-7 text-gray-500 text-lg font-semibold'>Save your time and easily rent or sell your property with the lowest commission on the real estate market.</p>
+                <form className=' flex flex-col gap-5' onSubmit={newsLatterHandler}>
+                  <div>
+                    <input type="email" id='newslatter' value={newslatter} onChange={(e) => setNewslatter(e.target.value)} className=' p-3 w-full rounded-sm text-lg font-semibold focus:outline-none ' placeholder='Your email*' />
+                    <p className=' text-lg text-red-700 font-semibold'>{newslatterError}</p>
+                  </div>
+                  <div>
+                    <button type='submit' disabled={uploading} className=' bg-orange-500 border-2 border-orange-500 text-white text-lg py-2 px-4 rounded-lg hover:bg-white hover:text-orange-500 transition-all'>{uploading ? 'Loading...' : "Sign up"}</button>
+                  </div>
+                </form>
+              </div>
+              {newslatterSuccess ? (
+                <div className=' bg-orange-500 mt-4 p-3 rounded-md text-lg text-white'>Thank you for your message. It has been sent.</div>
+              ) : error !== null ? (
+                <div className=' bg-orange-500 mt-4 p-3 rounded-md text-lg text-white'>{error}</div>
+              ) : null}
+            </div>
           </div>
         </div>
       </div>

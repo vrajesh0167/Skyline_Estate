@@ -6,6 +6,7 @@ import cookieParser from "cookie-parser";
 import userRouter from "./routers/user.router.js";
 import listingRouter from "./routers/listing.router.js";
 import enquiryRouter from "./routers/enquiry.router.js";
+import newslatterRouter from "./routers/newslatter.router.js";
 
 dotenv.config();
 
@@ -27,6 +28,7 @@ app.use("/api/auth", authRouter);
 app.use("/api/user", userRouter);
 app.use("/api/create", listingRouter);
 app.use('/api/enquiry', enquiryRouter);
+app.use('/api/newslatter', newslatterRouter);
 
 app.use((err, req, res, next) => {
     const statusCode = err.statusCode || 500;

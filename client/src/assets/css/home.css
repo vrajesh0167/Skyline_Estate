@@ -71,3 +71,16 @@
     background-color: rgba(255,255,255,.66);
     padding: 40px 48px ;
 }
+
+/* home_section7 */
+.home_section7{
+    background-image: url(../images/main-home-img-7.jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.home_section7 .formdiv{
+    backdrop-filter: blur(28px) brightness(130%);
+    background-color: rgba(255,255,255,.66);
+    padding: 40px 48px ;
+}
