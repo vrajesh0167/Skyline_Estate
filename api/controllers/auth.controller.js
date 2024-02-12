@@ -39,10 +39,21 @@ export const signin = async (req, res, next) => {
 
     const access_token = jwt.sign(
       { id: userFind._id },
-      process.env.ACCESS_SECRET
+      process.env.ACCESS_SECRET,
+      {expiresIn: process.env.ACCESSTOKEN_EXPIRATION}
     );
+    const refresh_token = jwt.sign(
+      { id: userFind._id },
+      process.env.REFRESH_SECRET,
+      {expiresIn: process.env.REFRESHTOKEN_EXPIRATION}
+    )
+
+    userFind.refreshToken = refresh_token;
+    await userFind.save({validateBeforeSave: false});
+
     res
       .cookie("access_token", access_token, { httpOnly: true })
+      .cookie("refresh_token", refresh_token, { httpOnly: true })
       .status(200)
       .json(userFind);
   } catch (error) {
@@ -54,12 +65,19 @@ export const google = async (req, res, next) => {
   try {
     const user = await User.findOne({ email: req.body.email });
     if (user) {
-      const token = jwt.sign({ id: user._id }, process.env.ACCESS_SECRET);
+      const token = jwt.sign({ id: user._id }, process.env.ACCESS_SECRET, {expiresIn: process.env.ACCESSTOKEN_EXPIRATION});
+
+      const refreshToken = jwt.sign({id: user._id}, process.env.REFRESH_SECRET, {expiresIn: process.env.REFRESHTOKEN_EXPIRATION});
+
+      user.refreshToken = refreshToken;
+      await user.save({validateBeforeSave: false});
+
       const { password: pass, ...rest } = user._doc;
 
       res
         .status(200)
         .cookie("access_token", token, { httpOnly: true })
+        .cookie("refresh_token", refreshToken, { httpOnly: true })
         .json(rest);
     } else {
       const generatePassword =
@@ -75,12 +93,19 @@ export const google = async (req, res, next) => {
       });
       await user.save();
 
-      const token = jwt.sign({ id: user._id }, process.env.ACCESS_SECRET);
+      const token = jwt.sign({ id: user._id }, process.env.ACCESS_SECRET, {expiresIn: process.env.ACCESSTOKEN_EXPIRATION});
+
+      const refreshToken = jwt.sign({id: user._id}, process.env.REFRESH_SECRET, {expiresIn: process.env.REFRESHTOKEN_EXPIRATION});
+
+      user.refreshToken = refreshToken;
+      await user.save({validateBeforeSave: false});
+
       const { password: pass, ...rest } = user._doc;
 
       return res
         .status(200)
         .cookie("access_token", token, { httpOnly: true })
+        .cookie("refresh_token", refreshToken, { httpOnly: true })
         .json(rest);
     }
   } catch (error) {
