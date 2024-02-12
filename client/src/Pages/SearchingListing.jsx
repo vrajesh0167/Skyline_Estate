@@ -129,13 +129,13 @@ export default function SearchingListing(props) {
 
     return (
         <div className=' searching_section'>
-            <div className=' border-e-2 p-9 lg:min-h-screen h-auto'>
+            <div className=' border-e-2 py-9 px-2 sm:py-9 sm:px-9 lg:min-h-screen h-auto'>
                 <form onSubmit={submitHandler} className=' flex flex-col gap-7'>
                     <div className=' flex items-center gap-3'>
                         <label htmlFor="searchterm" className=' text-slate-500 text-lg font-semibold whitespace-nowrap'>Search Term : </label>
                         <input type="text" name='searchTerm' id='searchTerm' value={formData.searchTerm} onChange={changeHandler} className=' w-full p-3 rounded-lg font-semibold text-slate-500 focus:outline-none focus:outline-slate-500 focus:outline-2 ' placeholder='Search...' />
                     </div>
-                    <div className=' flex items-center gap-2'>
+                    <div className=' flex items-center gap-2 flex-wrap'>
                         <label className=' text-slate-500 text-lg font-semibold whitespace-nowrap'>Type : </label>
                         <div className=' flex gap-2'>
                             <input type="checkbox" name='all' id='all' checked={formData.type === 'all'} onChange={changeHandler} className=' w-5' />
@@ -154,7 +154,7 @@ export default function SearchingListing(props) {
                             <span className=' text-lg text-slate-500 font-medium whitespace-nowrap'> Offer </span>
                         </div>
                     </div>
-                    <div className=' flex items-center gap-2'>
+                    <div className=' flex items-center gap-2 flex-wrap'>
                         <label className=' text-slate-500 text-lg font-semibold whitespace-nowrap'>Amenities : </label>
                         <div className=' flex gap-2'>
                             <input type="checkbox" name='parking' id='parking' checked={formData.parking} onChange={changeHandler} className=' w-5' />
