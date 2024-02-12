@@ -5,7 +5,33 @@ export const verifyToken = (req, res, next) => {
     const accessToken = req.cookies.access_token;
     // console.log(accessToken);
     if (!accessToken) {
-        return next(errorHandler(401, "Access token not provided"));
+        const refreshToken = req.cookies.refresh_token;
+
+            if (!refreshToken) {
+                return next(errorHandler(401, "Refresh token not provided"));
+            }
+
+            try {
+                const refreshDecoded = jwt.verify(
+                    refreshToken,
+                    process.env.REFRESH_SECRET
+                );
+
+                // Generate a new access token
+                const newAccessToken = jwt.sign(
+                    {id: refreshDecoded.id},
+                    process.env.ACCESS_SECRET,
+                    {expiresIn: process.env.ACCESSTOKEN_EXPIRATION}
+                )
+
+                 // Update the access token in the response
+                res.cookie('access_token', newAccessToken, { httpOnly: true });
+
+                req.user = refreshDecoded;
+                return next();
+            } catch (error) {
+                return next(errorHandler(401, "Invalid refresh token"));
+            }
     }
 
     try {
