@@ -1,19 +1,26 @@
+import { User } from "../models/user.model.js";
 import { errorHandler } from "./errorHandler.js";
 import jwt from "jsonwebtoken";
 
-export const verifyToken = (req, res, next) => {
+export const verifyToken = async (req, res, next) => {
     const accessToken = req.cookies.access_token;
+    let refreshTokens = req.cookies.refresh_token;
     // console.log(accessToken);
-    if (!accessToken) {
-        const refreshToken = req.cookies.refresh_token;
 
-            if (!refreshToken) {
-                return next(errorHandler(401, "Refresh token not provided"));
+    const user = await User.findById({_id: req.params.id});
+    // console.log("user", user);
+
+    if (!accessToken) {
+
+            if (!refreshTokens) {
+                // const user = await User.findById({_id: req.params.id});
+                refreshTokens = user.refreshToken;
             }
+            console.log(refreshTokens);
 
             try {
                 const refreshDecoded = jwt.verify(
-                    refreshToken,
+                    refreshTokens,
                     process.env.REFRESH_SECRET
                 );
 
@@ -39,16 +46,14 @@ export const verifyToken = (req, res, next) => {
 
         // Check if token has expired
         if (decoded.exp * 1000 < Date.now()) {
-            // Token has expired, handle refresh
-            const refreshToken = req.cookies.refresh_token;
 
-            if (!refreshToken) {
+            if (!refreshTokens) {
                 return next(errorHandler(401, "Refresh token not provided"));
             }
 
             try {
                 const refreshDecoded = jwt.verify(
-                    refreshToken,
+                    refreshTokens,
                     process.env.REFRESH_SECRET
                 );
 
