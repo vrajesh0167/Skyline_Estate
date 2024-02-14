@@ -29,7 +29,7 @@ export default function CreateListing(props) {
     const [ImageUploadError, setImageUploaderror] = useState(false);
     const [uploading, setUploading] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(false);
+    const [error, setError] = useState(null);
     const navigate = useNavigate();
 
     const handleFileChange = (e) => {
@@ -58,7 +58,7 @@ export default function CreateListing(props) {
             }
 
             Promise.all(UploadedImages).then((urls) => {
-                console.log("urls:- ", urls);
+                // console.log("urls:- ", urls);
                 setFormData({ ...formData, imageUrls: formData.imageUrls.concat(urls) });
                 setImageUploaderror(true);
                 setUploading(false);
@@ -136,7 +136,6 @@ export default function CreateListing(props) {
             }
 
             setLoading(true);
-            setError(false);
 
             const res = await fetch('/api/create/listing', {
                 method: 'POST',
@@ -148,18 +147,17 @@ export default function CreateListing(props) {
                 })
             });
             const data = await res.json();
-            console.log(data.listing);
+            console.log(data);
             if(data.success === false) {
                 setLoading(false);
                 setError(data.message);
                 return;
             }
             setLoading(false);
-            setError(false);
-            navigate(`/listing/${data.listing._id}`);
+            navigate(`/listing/${data._id}`);
         } catch (error) {
-            console.log(error);
             setError(error);
+            console.log(error);
         }
     }
     return (
@@ -267,7 +265,7 @@ export default function CreateListing(props) {
                     }
                     <button disabled={loading} type=' submit' className=' p-3 w-full border-2 border-sky-600 rounded-lg text-lg font-semibold bg-sky-600 text-white hover:bg-white hover:text-sky-600'>{loading ? "Creating..." : "Create Listing"}</button>
 
-                    <p className=' text-rose-600 font-semibold'>{error}</p>
+                    {error && <p className='text-rose-600 font-semibold'>{typeof error === 'object' ? error.message : error}</p>}
                 </div>
             </form >
         </div >

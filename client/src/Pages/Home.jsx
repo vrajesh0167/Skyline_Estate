@@ -51,7 +51,7 @@ export default function Home(props) {
         }
         // console.log('listing :- ', data);
         // Slice the first 4 items from the data array
-        const slicedData = data.listings.slice(0,);
+        const slicedData = data.listings.slice(0,6);
         setListingData({ ...data, listings: slicedData });
       } catch (error) {
         console.log("getAllListing failed :- ", error);

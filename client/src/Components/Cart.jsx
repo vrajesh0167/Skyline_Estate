@@ -9,11 +9,10 @@ export default function Cart(props) {
     // console.log('props.listing:', props.listing);
     // console.log('props.user:', props.user);
 
-    const { _id, imageUrls, Name, description, address, type, regularPrice, discountPrice, bedrooms, bathrooms } = props.listing;
+    const { _id, imageUrls, Name, description, address, type, regularPrice, discountPrice, bedrooms, userRef, bathrooms } = props.listing;
     // console.log(imageUrls);
-    const { username, avatar } = props.user;
     const DisLestPrice = Number(regularPrice) - Number(discountPrice);
-    const DisplayImage = imageUrls.slice(0,3);
+    const DisplayImage = imageUrls.slice(0, 3);
 
     return (
         <div className=' estate items-stretch'>
@@ -32,12 +31,16 @@ export default function Cart(props) {
                 <div className='type absolute top-4 left-0 z-10 '>
                     <p className=' text-lg font-semibold py-1 px-4 '>{type === 'rent' ? 'For Rent' : 'Sell'}</p>
                 </div>
-                <div className='profile absolute bottom-6 left-9 z-10 ps-4 flex items-center'>
-                    <div className=' absolute left-0 top-1/2 ' style={{ transform: 'translate(-50%, -50%' }}>
-                        <img src={avatar} alt="avatar" className=' rounded-full w-14 h-14 border-2 border-slate-400' />
-                    </div>
-                    <span className='username py-1 px-4 font-semibold'> {username}</span>
-                </div>
+                {props.user.map(user => (
+                    userRef === user._id && (
+                        <div className='profile absolute bottom-6 left-9 z-10 ps-4 flex items-center'>
+                            <div className=' absolute left-0 top-1/2 ' style={{ transform: 'translate(-50%, -50%' }}>
+                                <img key={user._id} src={user.avatar} alt="avatar" className='rounded-full w-14 h-14 border-2 border-slate-400' />
+                            </div>
+                            <span className='username py-1 px-4 font-semibold'> {user.username}</span>
+                        </div>
+                    )
+                ))}
             </div>
             <div className=' p-4 shadow-lg rounded-b-lg'>
                 <p className=' text-base font-semibold text-slate-600 mt-3'><i className="ri-map-pin-fill text-lg text-green-600" /> {address}</p>

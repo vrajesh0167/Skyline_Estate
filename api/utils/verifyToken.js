@@ -6,12 +6,10 @@ export const verifyToken = async (req, res, next) => {
     const accessToken = req.cookies.access_token;
     let refreshTokens = req.cookies.refresh_token;
     // console.log(accessToken);
-
-    const user = await User.findById({_id: req.params.id});
-    // console.log("user", user);
-
+    
     if (!accessToken) {
-
+        const user = await User.findById({_id: req.params.id});
+        // console.log("user", user);
             if (!refreshTokens) {
                 // const user = await User.findById({_id: req.params.id});
                 refreshTokens = user.refreshToken;

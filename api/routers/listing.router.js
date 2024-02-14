@@ -12,7 +12,7 @@ import {
 
 const router = express.Router();
 
-router.post("/listing", verifyToken, createListing);
+router.post("/listing",verifyToken, createListing);
 router.get("/listings/:id", verifyToken, getUserListing);
 router.delete("/delete/:id", verifyToken, deleteUserListing);
 router.put("/update/:id", updateUserListing);

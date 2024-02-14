@@ -5,11 +5,9 @@ import { errorHandler } from "../utils/errorHandler.js";
 //create listing
 export const createListing = async (req, res, next) => {
     try {
-        const listing = await Listing.create(req.body);
-        return res.status(201).json({
-            message: "Listing created successfully",
-            listing,
-        });
+        const listings = await Listing.create(req.body);
+        // console.log(listings);
+        return res.status(201).json(listings);
     } catch (error) {
         return next(
             errorHandler(
@@ -111,8 +109,8 @@ export const getAllListings = async (req, res, next) => {
         if (!getAllListings) {
             return next(errorHandler(401, "Listing not found"));
         }
-        const getListingUser = await User.findById({
-            _id: getAllListings[0].userRef,
+        const getListingUser = await User.find({
+            _id: getAllListings.map(getAllListings => getAllListings.userRef),
         });
         // console.log(getListingUSer);
 
@@ -184,11 +182,11 @@ export const searchListing = async (req, res, next) => {
 
         const getListingsUser =
             listings.length > 0
-                ? await User.findById({ _id: listings[0].userRef })
+                ? await User.find({ _id: listings.map(listing => listing.userRef) })
                 : null;
         // console.log(getListingsUser);
 
-        const customResponse = {
+        const customResponse = {    
             listings: listings,
             user: getListingsUser,
         };
