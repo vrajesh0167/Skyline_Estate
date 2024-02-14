@@ -1,5 +1,5 @@
 .about_title_section{
-    background-image: url(../images/about-us-title-img.jpg);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url(../images/about-us-title-img.jpg);
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;

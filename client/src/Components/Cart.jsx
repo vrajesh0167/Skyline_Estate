@@ -16,7 +16,7 @@ export default function Cart(props) {
     const DisplayImage = imageUrls.slice(0,3);
 
     return (
-        <div className=' estate'>
+        <div className=' estate items-stretch'>
             <div className=' w-full relative'>
                 <Swiper pagination={{ clickable: true, }} spaceBetween={20} modules={[Pagination]} slidesPerView={1} slidesPerGroup={1}>
                     {
@@ -49,7 +49,7 @@ export default function Cart(props) {
                 <div className=' flex justify-between'>
                     <h3 className=' text-3xl font-semibold'>{DisLestPrice.toLocaleString('en-US')}$</h3>
                     <div>
-                        <ul className=' flex gap-4 flex-wrap'>
+                        <ul className=' flex gap-4 sm:flex-wrap flex-col sm:flex-row'>
                             <li className=' text-lg font-semibold text-slate-600'><i className="ri-hotel-bed-fill text-green-700 text-lg"></i>{bedrooms}  Bed</li>
                             <li className=' text-lg font-semibold text-slate-600'><i className="icofont icofont-bathtub text-green-700 text-xl"></i>{bathrooms}  bath</li>
                         </ul>

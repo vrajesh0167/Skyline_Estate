@@ -146,38 +146,38 @@ export default function Home(props) {
 
   return (
     <div>
-      <div className=' px-4 '>
-        <div className=' h-screen flex justify-center items-center relative'>
+      <div className=' px-4'>
+        <div className=' h-screen flex justify-center items-center relative rounded-lg overflow-hidden'>
           <Swiper loop={true} effect={'fade'} autoplay={{ delay: 3000, pauseOnMouseEnter: true }} modules={[EffectFade, Pagination, Autoplay]}>
             <SwiperSlide>
-              <div className='swiper-slide-content'>
+              <div className='swiper-slide-content rounded-lg'>
                 <img src={homeRev1} alt="homw-rev-img1" className=' w-full object-cover rounded-lg h-screen' />
               </div>
             </SwiperSlide>
             <SwiperSlide>
-              <div className='swiper-slide-content'>
+              <div className='swiper-slide-content rounded-lg'>
                 <img src={homeRev2} alt="home-rev-img2" className=' w-full object-cover rounded-lg h-screen' />
               </div>
             </SwiperSlide>
             <SwiperSlide>
-              <div className='swiper-slide-content'>
+              <div className='swiper-slide-content rounded-lg'>
                 <img src={homeRev3} alt="home-rev-img3" className=' w-full object-cover rounded-lg h-screen' />
               </div>
             </SwiperSlide>
             <SwiperSlide>
-              <div className='swiper-slide-content'>
+              <div className='swiper-slide-content rounded-lg'>
                 <img src={homeRev4} alt="home-rev-img4" className=' w-full object-cover rounded-lg h-screen' />
               </div>
             </SwiperSlide>
             <SwiperSlide>
-              <div className='swiper-slide-content'>
+              <div className='swiper-slide-content rounded-lg'>
                 <img src={homeRev5} alt="home_img_2" className=' w-full object-cover rounded-lg h-screen' />
               </div>
             </SwiperSlide>
           </Swiper>
           <div className=' home_section max-w-7xl mx-auto p-3 absolute top-1/4 left-1/4 sm:top-1/2 sm:left-1/2 z-10' >
             <div className=' flex flex-col gap-5 text-center'>
-              <h1 className=' my-7 text-3xl lg:text-5xl 2xl:text-6xl font-extrabold text-gray-300 drop-shadow-lg  '>Find your next <span className=' text-gray-400'>perfect</span><br className=' md:block hidden' />place with ease</h1>
+              <h1 className=' my-7 text-3xl lg:text-5xl 2xl:text-6xl font-extrabold text-gray-300 drop-shadow-lg  '>Find your next <span className=' text-gray-400'>perfect </span><br className=' md:block hidden' />place with ease</h1>
               <p className=' text-gray-200 text-sm sm:text-lg font-semibold'>Sahand Estate will help you find your home fast, easy and comfortable. <br className=' md:block hidden' /> Our expert support are always available.</p>
               <Link to={'/searchingListing'} className='text-sm sm:text-lg font-bold'>
                 <button className=' bg-slate-600 text-gray-300 py-2 px-5 border-2 border-slate-600 rounded-lg hover:bg-white hover:text-slate-600 transition-all'>Let's Start now...</button>
@@ -188,7 +188,7 @@ export default function Home(props) {
       </div>
 
       {/* real estate section (Home_section2) */}
-      <div className='my-24 container mx-auto'>
+      <div className='my-24 container mx-auto px-4'>
         <div className=' mb-12'>
           <h2 className=' text-3xl xl:text-5xl font-semibold text-slate-600'>Our choice of <br className=' lg:block hidden' /> popular <span className=' font-bold text-gray-700'>real estate</span></h2>
         </div>
@@ -208,12 +208,12 @@ export default function Home(props) {
       </div>
 
       {/* home_section3 */}
-      <div className=' home_section3 py-24  lg:ps-20 px-10 container mx-auto'>
+      <div className=' home_section3 py-24  lg:ps-20 sm:px-10 px-4 container mx-auto'>
         <div className=' grid grid-cols-1 lg:grid-cols-2 grid-flow-row'>
           <div className='home_img relative'>
             <img src={homeRev6} alt="homerev-6" className=' object-cover rounded-lg relative z-10 h-full' />
           </div>
-          <div className=' ps-12 lg:pt-0 pt-14'>
+          <div className=' sm:ps-12 lg:pt-0 pt-14'>
             <h2 className=' text-3xl xl:text-5xl font-semibold text-slate-600'>Modern spaces and <br className=' lg:block hidden' /><span className=' font-bold text-gray-700'>premium</span> design</h2>
             <p className=' text-lg font-normal text-gray-500 mt-8'>Lorem ipsum dolor sit amet, minimum inimicus quo no, at vix primis viderere vituperatoribus. In corpora argumentum.</p>
             <ul className=' mt-8'>
@@ -229,7 +229,7 @@ export default function Home(props) {
       </div>
 
       {/* home_section4 */}
-      <div className=' container py-24 mx-auto'>
+      <div className=' container py-24 mx-auto px-4'>
         <div className=' mb-16'>
           <h2 className=' text-3xl xl:text-5xl font-semibold text-slate-600'>How It works? <br className=' lg:block hidden' /> Find a <span className=' font-bold text-gray-700'>perfect home</span></h2>
         </div>
@@ -316,7 +316,7 @@ export default function Home(props) {
       </div>
 
       {/* home section 5 */}
-      <div className=' container mx-auto py-24'>
+      <div className=' container mx-auto py-24 px-4'>
         <div className=' grid lg:grid-cols-2 grid-cols-1 row-auto lg:gap-5 gap-8'>
           <div className=' pe-28'>
             <div className=' flex flex-col justify-center'>
@@ -372,12 +372,12 @@ export default function Home(props) {
       </div>
 
       {/* home_section6 */}
-      <div className=' home_section6 py-24  lg:ps-20 px-10 container mx-auto'>
+      <div className=' home_section6 py-24  lg:ps-20 sm:px-10 px-4 container mx-auto p-3'>
         <div className=' grid grid-cols-1 lg:grid-cols-2 grid-flow-row'>
           <div className='home_img relative'>
             <img src={homeRev7} alt="homerev-6" className=' object-cover rounded-lg relative z-10 h-full' />
           </div>
-          <div className=' flex flex-col justify-center ps-12 lg:pt-0 pt-14'>
+          <div className=' flex flex-col justify-center sm:ps-12 lg:pt-0 pt-14'>
             <h2 className=' text-3xl xl:text-5xl font-semibold text-slate-600'>Explore your home <br className=' lg:block hidden' /><span className=' font-bold text-gray-700'>loan options</span></h2>
             <p className=' text-lg font-normal text-gray-500 mt-8'>Lorem ipsum dolor sit amet, minimum inimicus quo no, at vix primis viderere vituperatoribus. In corpora argumentum. Vix ferri dicam contentiones ne, ex appetere salutatus</p>
 

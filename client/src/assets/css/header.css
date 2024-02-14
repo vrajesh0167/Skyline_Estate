@@ -19,3 +19,55 @@ header .nav-link:hover{
     color: rgb(100 116 139);
 }
 
+header .nav-res {
+    display: none;
+}
+
+header .nav-res .bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px 0;
+    background-color: #37474f;
+    transition: all .4s;
+}
+
+@media screen and (max-width: 768px) {
+    header .nav-res {
+        display: block;
+    }
+
+    header .nav-res.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    header .nav-res.active .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+
+    header .nav-res.active .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+    
+    header .Nav-menu {
+        position: fixed ;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 1rem;
+        right: -100%;
+        top: 69px;
+        background-color: rgba(255,255,255,.66);
+        backdrop-filter: blur(20px) brightness(130%);
+        flex-direction: column;
+        width: 100%;
+        text-align: center;
+        transition: all 0.4s;
+        @media screen and (max-width:640px) {
+            top: 60px;
+        }
+    }
+    header .Nav-menu.active {
+        right: 0;
+    }
+}

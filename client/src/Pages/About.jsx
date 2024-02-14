@@ -16,13 +16,13 @@ export default function About(props) {
   return (
     <div>
       <div className='about_title_section mx-5 rounded-lg'>
-        <div className=' container about_title flex items-center mx-auto'>
-          <h2 className=' text-6xl sm:text-7xl text-white font-semibold'>About Us</h2>
+        <div className=' container about_title flex items-center mx-auto p-4'>
+          <h2 className=' text-5xl sm:text-7xl text-white font-semibold'>About Us</h2>
         </div>
       </div>
 
       {/* vision_section */}
-      <div className=' pt-24 pb-12 '>
+      <div className=' pt-24 pb-12 px-4 '>
         <div className=' container mx-auto grid grid-cols-1 lg:grid-cols-2 grid-flow-row gap-5'>
           <div>
             <img src={aboutImg1} alt="about img us" className=' object-cover w-full rounded-lg' />
@@ -38,7 +38,7 @@ export default function About(props) {
       </div>
 
       {/* mision_section */}
-      <div className=' pb-24 pt-12 '>
+      <div className=' pb-24 pt-12 px-4'>
         <div className=' container mx-auto grid grid-cols-1 lg:grid-cols-2 grid-flow-row gap-5'>
           <div className=' lg:ps-12 flex justify-center flex-col'>
             <h2 className=' text-4xl sm:text-5xl font-semibold mb-3'>Mission</h2>
@@ -55,7 +55,7 @@ export default function About(props) {
 
       {/* about_last section */}
       <div className='about_last_section mx-5 rounded-lg'>
-        <div className=' container about_last mx-auto flex flex-col justify-center'>
+        <div className=' container about_last mx-auto flex flex-col justify-center px-4'>
           <h2 className=' text-4xl sm:text-7xl font-semibold text-white max-w-2xl'>Premium Houses and Apartments</h2>
           <p className=' text-lg text-white font-semibold mt-3'>* Save your time and easily rent or sell your property</p>
         </div>
