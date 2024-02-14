@@ -5,6 +5,8 @@ import 'swiper/css/navigation';
 import 'swiper/css/effect-fade';    
 import { useParams } from 'react-router-dom';
 import { EffectFade, Navigation, Autoplay } from 'swiper/modules';
+import { useSelector } from 'react-redux';
+import Contact from '../Components/Contact';
 
 
 export default function Listing(props) {
@@ -13,6 +15,8 @@ export default function Listing(props) {
     const [error, setError] = useState(false);
     const [listing, setListing] = useState(null);
     // console.log(listing);
+    const {currentUser} = useSelector((state) => state.user);
+    const [contact, setContact] = useState(false);
 
     const DisLestPrice = Number(listing && listing.regularPrice) - Number(listing && listing.discountPrice);
 
@@ -60,7 +64,7 @@ export default function Listing(props) {
                                 ))
                             }
                         </Swiper>
-                        <div className=' max-w-4xl mx-auto flex flex-col p-5 mt-9 shadow-xl rounded-lg'>
+                        <div className=' max-w-6xl mx-auto flex flex-col p-5 mt-9 shadow-xl rounded-lg'>
                             <div >
                                 <h2 className=' text-3xl font-bold text-slate-600'>
                                     {capitalizeFirstLetter(listing.Name)} <span>- ${DisLestPrice.toLocaleString('en-US')}</span> {
@@ -85,6 +89,16 @@ export default function Listing(props) {
                                     <li className=' text-lg font-semibold text-slate-600'><i className="ri-parking-box-line text-green-700 text-xl"></i> {listing.parking} { listing.parking === true ? 'Parking Shot' : 'Not Parking shot'}</li>
                                     <li className=' text-lg font-semibold text-slate-600'><i className="ri-sofa-fill text-green-700 text-xl"></i> {listing.furnished} { listing.furnished === true ? 'Furnished' : 'Not Furnished'}</li>
                                 </ul>
+                            </div>
+                            <div className=' mt-5'>
+                                {
+                                    currentUser && listing.userRef !== currentUser._id && !contact &&(
+                                        <button onClick={() => setContact(true)} className=' bg-sky-600 p-3 w-full border-2 border-sky-600 rounded-lg text-white font-semibold text-xl hover:bg-white hover:text-sky-600 transition-all'>Contact landlord</button>
+                                    ) 
+                                }
+                                {
+                                    contact && <Contact listing={listing} setProgress={setProgress}/>   
+                                }
                             </div>
                         </div>
                     </div>
