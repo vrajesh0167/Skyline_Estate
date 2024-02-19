@@ -4,13 +4,24 @@ import aboutImg1 from '../assets/images/about-us-img1.jpg'
 import aboutImg2 from '../assets/images/about-us-img3.jpg'
 
 export default function About(props) {
-  const setProgress = props.setProgress
+  const setProgress = props.setProgress;
+
+  // scroll to top
+  const ScrollToTop = () => {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    })
+  }
 
   useEffect(() => {
+    ScrollToTop();
+
     setProgress(10)
     setTimeout(() => {
       setProgress(100)
     }, 500)
+    
   }, [])
 
   return (

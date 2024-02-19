@@ -40,7 +40,17 @@ export default function Home(props) {
   const [newslatterError, setNewslatterError] = useState(null);
   const [uploading, setUploading] = useState(false);
 
+   // scroll to top
+  const ScrollToTop = () => {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    })
+  }
+
   useEffect(() => {
+    ScrollToTop();
+    
     const fetchData = async () => {
       try {
         const res = await fetch('/api/create/allListing',);
