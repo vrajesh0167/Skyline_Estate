@@ -5,7 +5,7 @@ import jwt from "jsonwebtoken";
 
 export const signup = async (req, res, next) => {
   // console.log(req.body);
-  const { username, email, password } = req.body;
+  const { username, email, password, role } = req.body;
   const hashPassword = await bcrypt.hash(password, 10);
 
   try {
@@ -13,6 +13,7 @@ export const signup = async (req, res, next) => {
       username,
       email,
       password: hashPassword,
+      role: role || "User",  // Default role is "User"
     });
     // console.log(userfind);
 
@@ -24,10 +25,10 @@ export const signup = async (req, res, next) => {
 };
 
 export const signin = async (req, res, next) => {
-  const {email, password } = req.body;
+  const { email, password } = req.body;
 
   try {
-    const userFind = await User.findOne({email});
+    const userFind = await User.findOne({ email });
     if (!userFind) {
       return next(errorHandler(404, "User Not Found..."));
     }
@@ -38,18 +39,18 @@ export const signin = async (req, res, next) => {
     }
 
     const access_token = jwt.sign(
-      { id: userFind._id },
+      { id: userFind._id, role: userFind.role }, // Include role in the token
       process.env.ACCESS_SECRET,
-      {expiresIn: process.env.ACCESSTOKEN_EXPIRATION}
+      { expiresIn: process.env.ACCESSTOKEN_EXPIRATION }
     );
     const refresh_token = jwt.sign(
       { id: userFind._id },
       process.env.REFRESH_SECRET,
-      {expiresIn: process.env.REFRESHTOKEN_EXPIRATION}
+      { expiresIn: process.env.REFRESHTOKEN_EXPIRATION }
     )
 
     userFind.refreshToken = refresh_token;
-    await userFind.save({validateBeforeSave: false});
+    await userFind.save({ validateBeforeSave: false });
 
     res
       .cookie("access_token", access_token, { httpOnly: true })
@@ -65,12 +66,12 @@ export const google = async (req, res, next) => {
   try {
     const user = await User.findOne({ email: req.body.email });
     if (user) {
-      const token = jwt.sign({ id: user._id }, process.env.ACCESS_SECRET, {expiresIn: process.env.ACCESSTOKEN_EXPIRATION});
+      const token = jwt.sign({ id: user._id }, process.env.ACCESS_SECRET, { expiresIn: process.env.ACCESSTOKEN_EXPIRATION });
 
-      const refreshToken = jwt.sign({id: user._id}, process.env.REFRESH_SECRET, {expiresIn: process.env.REFRESHTOKEN_EXPIRATION});
+      const refreshToken = jwt.sign({ id: user._id }, process.env.REFRESH_SECRET, { expiresIn: process.env.REFRESHTOKEN_EXPIRATION });
 
       user.refreshToken = refreshToken;
-      await user.save({validateBeforeSave: false});
+      await user.save({ validateBeforeSave: false });
 
       const { password: pass, ...rest } = user._doc;
 
@@ -93,12 +94,12 @@ export const google = async (req, res, next) => {
       });
       await user.save();
 
-      const token = jwt.sign({ id: user._id }, process.env.ACCESS_SECRET, {expiresIn: process.env.ACCESSTOKEN_EXPIRATION});
+      const token = jwt.sign({ id: user._id }, process.env.ACCESS_SECRET, { expiresIn: process.env.ACCESSTOKEN_EXPIRATION });
 
-      const refreshToken = jwt.sign({id: user._id}, process.env.REFRESH_SECRET, {expiresIn: process.env.REFRESHTOKEN_EXPIRATION});
+      const refreshToken = jwt.sign({ id: user._id }, process.env.REFRESH_SECRET, { expiresIn: process.env.REFRESHTOKEN_EXPIRATION });
 
       user.refreshToken = refreshToken;
-      await user.save({validateBeforeSave: false});
+      await user.save({ validateBeforeSave: false });
 
       const { password: pass, ...rest } = user._doc;
 

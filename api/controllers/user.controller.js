@@ -51,16 +51,16 @@ export const signOut = (req, res, next) => {
 
 //Delete Controller
 export const deleteUser = async (req, res, next) => {
-    if(req.user.id !== req.params.id){
+    if (req.user.id !== req.params.id) {
         return next(errorHandler(401, "You can only delete your own account."));
     }
 
-    
+
     try {
         await User.findByIdAndDelete(req.user.id);
-    
+
         return res.status(200).clearCookie('access_token').json('User Delete Successful');
-        
+
     } catch (error) {
         return next(errorHandler(500))
     }
@@ -69,15 +69,30 @@ export const deleteUser = async (req, res, next) => {
 //getuser 
 export const getuser = async (req, res, next) => {
     try {
-        const user = await User.findById({_id: req.params.id});
+        const user = await User.findById({ _id: req.params.id });
 
         if (!user) {
             return next(errorHandler(401, "User not found"));
         }
-        const { password: pass , ...rest} = user._doc;
-        
+        const { password: pass, ...rest } = user._doc;
+
         return res.status(200).json(rest);
     } catch (error) {
         return next(errorHandler(500, `something went wrong while getting user ${error}`));
     }
 }
+
+// Fetch all users (Admin):-
+export const getAllUsers = async (req, res, next) => {
+    try {
+        const users = await User.find({}, "username email role avatar");
+
+        if (!users.length) {
+            return next(errorHandler(404, "No users found"));
+        }
+
+        res.status(200).json(users);
+    } catch (error) {
+        next(errorHandler(500,error.message));
+    }
+};
