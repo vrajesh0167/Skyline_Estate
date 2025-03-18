@@ -42,12 +42,12 @@ const AdminHeader = () => {
                         <div className=' flex gap-4'>
                             {
                                 currentUser ? (
-                                    <NavLink to={'/profile'} className='nav-link relative'>
+                                    <NavLink to={'/admin/profile'} className='nav-link relative'>
                                         <img src={currentUser.avatar} alt="Profile" className=' rounded-3xl bg-cover w-7 h-7 border-2 border-slate-500' />
                                     </NavLink>
                                 ) : (
                                     <div>
-                                        <NavLink to='/signin' className='nav-link md:text-xl text-lg font-semibold relative'>Sign In</NavLink>
+                                        <NavLink to='/admin/signin' className='nav-link md:text-xl text-lg font-semibold relative'>Sign In</NavLink>
                                     </div>
                                 )
                             }

@@ -208,7 +208,7 @@ export default function Profile(props) {
                 <button disabled={loading} type='submit' className=' border-2 w-full border-sky-600  rounded-lg p-3 bg-sky-600 text-white  text-lg font-medium hover:text-sky-600 hover:bg-white transition-all relative z-10 my-2'>{loading ? "Updating..." : "Update"}</button>
             </form>
 
-            <button className=' border-2 border-sky-600 w-full p-3 rounded-lg bg-sky-600 text-white text-lg font-medium hover:text-sky-600 hover:bg-white transition-all '><Link to={'/createListing'}>Create Listing</Link></button>
+            <button className=' border-2 border-sky-600 w-full p-3 rounded-lg bg-sky-600 text-white text-lg font-medium hover:text-sky-600 hover:bg-white transition-all '><Link to={isAdmin ? '/admin/createListing' : '/createListing'}>Create Listing</Link></button>
 
             <p className=' text-base font-medium text-center text-red-600'>{error ? error : ''}</p>
 
@@ -239,7 +239,7 @@ export default function Profile(props) {
                                         <p>{listing.Name}</p>
                                     </Link>
                                     <div className=' flex flex-col gap-2 text-center'>
-                                        <Link to={`/updateListing/${listing._id}`}>
+                                        <Link to={isAdmin ? `/admin/updateListing/${listing._id}` : `/updateListing/${listing._id}`}>
                                             <button className=' py-1 px-2 bg-sky-600 text-white border border-sky-600 rounded-lg hover:text-sky-600 hover:bg-white transition-all'>Edit</button>
                                         </Link>
                                         <button onClick={() => deleteListingHandler(listing._id)} className=' py-1 px-2 bg-red-700 text-white border border-red-700 rounded-lg hover:text-red-700 hover:bg-white transition-all'>Delete</button>

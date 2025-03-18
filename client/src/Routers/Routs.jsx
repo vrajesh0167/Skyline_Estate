@@ -52,6 +52,7 @@ export default function Routs() {
 
                 {/* Protected Admin Routes */}
                 {/* <Route element={<AdminPrivateRoute />}> */}
+                    <Route path='/admin/profile' element={<Profile setProgress={setProgress}></Profile>}></Route>
                     <Route path="/admin/home" element={<AdminHome setProgress={setProgress} />} />
                     <Route path="/admin/createListing" element={<CreateListing setProgress={setProgress} />} />
                     <Route path='/admin/listing/:id' element={<Listing setProgress={setProgress}></Listing>}></Route>
