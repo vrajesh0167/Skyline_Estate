@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from "firebase/storage";
 import firebase from '../Firebase';
 import { UserOutStart, userOutFail, userOutSuccess, userUpdateFail, userUpdateStart, userUpdateSuccess } from '../Store/User/Userslice';
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
 export default function Profile(props) {
     const setProgress = props.setProgress;
@@ -21,6 +21,9 @@ export default function Profile(props) {
     const [showListingError, setShowListingError] = useState(false);
     const [userListings, setUserListing] = useState([]);
     // console.log(userListings);
+
+    const location = useLocation();
+    const isAdmin = location.pathname.startsWith("/admin");
 
     const dispatch = useDispatch()
 
@@ -229,10 +232,10 @@ export default function Profile(props) {
                         {
                             userListings.map((listing) => (
                                 <div key={listing._id} className=' flex items-center justify-between border-2 p-2 '>
-                                    <Link to={`/listing/${listing._id}`}>
+                                    <Link to={`${isAdmin ? `/admin/listing/${listing._id}` : `/admin/listing/${listing._id}`}`}>
                                         <img src={listing.imageUrls[0]} alt="listing image" className=' object-contain w-24 h-20 rounded-lg' />
                                     </Link>
-                                    <Link to={`/listing/${listing._id}`} className=' flex-1 text-lg font-semibold text-slate-700 ms-2 truncate'>
+                                    <Link to={`${isAdmin ? `/admin/listing/${listing._id}` : `/admin/listing/${listing._id}`}`} className=' flex-1 text-lg font-semibold text-slate-700 ms-2 truncate'>
                                         <p>{listing.Name}</p>
                                     </Link>
                                     <div className=' flex flex-col gap-2 text-center'>

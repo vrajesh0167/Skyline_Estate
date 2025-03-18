@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from "firebase/storage";
 import firebase from '../Firebase'
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 
 
@@ -33,6 +33,10 @@ export default function UpdateListing(props) {
     const [uploading, setUploading] = useState(false);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
+
+    const location = useLocation();
+    const isAdmin = location.pathname.startsWith("/admin");
+
     const navigate = useNavigate();
 
     const handleFileChange = (e) => {
@@ -187,7 +191,7 @@ export default function UpdateListing(props) {
             }
             setLoading(false);
             setError(false);
-            navigate(`/listing/${data.updateListing._id}`);
+            navigate(`${isAdmin ? `/admin/listing/${data.updateListing._id}` : `/listing/${data.updateListing._id}`}`);
         } catch (error) {
             console.log(error);
             setError(error);

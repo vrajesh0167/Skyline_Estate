@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from "firebase/storage";
 import firebase from '../Firebase'
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 export default function CreateListing(props) {
     const setProgress = props.setProgress;
@@ -31,6 +31,9 @@ export default function CreateListing(props) {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const navigate = useNavigate();
+
+    const location = useLocation();
+    const isAdmin = location.pathname.startsWith("/admin");
 
     const handleFileChange = (e) => {
         const selectedFile = e.target.files;
@@ -154,7 +157,7 @@ export default function CreateListing(props) {
                 return;
             }
             setLoading(false);
-            navigate(`/listing/${data._id}`);
+            navigate(`${isAdmin ?`/admin/listing/${data._id}` : `/listing/${data._id}`}`);
         } catch (error) {
             setError(error);
             console.log(error);

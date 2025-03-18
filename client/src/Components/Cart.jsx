@@ -3,9 +3,12 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import 'swiper/css/pagination';
 import { Pagination } from 'swiper/modules';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 export default function Cart(props) {
+
+    const location = useLocation();
+    const isAdmin = location.pathname.startsWith("/admin");
     // console.log('props.listing:', props.listing);
     // console.log('props.user:', props.user);
 
@@ -21,7 +24,7 @@ export default function Cart(props) {
                     {
                         DisplayImage.map((urls) => (
                             <SwiperSlide key={urls}>
-                                <Link to={`/listing/${_id}`}>
+                                <Link to={`${isAdmin ? `/admin/listing/${_id}` : `/listing/${_id}`}`}>
                                     <img src={urls} alt="real estate" className=' object-cover rounded-lg w-full h-80' />
                                 </Link>
                             </SwiperSlide>
@@ -45,7 +48,7 @@ export default function Cart(props) {
             <div className=' p-4 shadow-lg rounded-b-lg'>
                 <p className=' text-base font-semibold text-slate-600 mt-3'><i className="ri-map-pin-fill text-lg text-green-600" /> {address}</p>
                 <h2 className=' text-3xl font-bold text-slate-600 mb-3 '>
-                    <Link to={`/listing/${_id}`} className=' relative'>{Name}</Link>
+                    <Link to={`${isAdmin ? `/admin/listing/${_id}` : `/listing/${_id}`}`} className=' relative'>{Name}</Link>
                 </h2>
                 <p className=' text-lg font-normal text-gray-500 line-clamp-3'>{description}</p>
                 <hr className=' border-1 text-slate-800' />
