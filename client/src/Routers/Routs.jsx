@@ -56,7 +56,7 @@ export default function Routs() {
                     <Route path="/admin/home" element={<AdminHome setProgress={setProgress} />} />
                     <Route path="/admin/createListing" element={<CreateListing setProgress={setProgress} />} />
                     <Route path='/admin/listing/:id' element={<Listing setProgress={setProgress}></Listing>}></Route>
-                    {/* <Route path='/admin/users' element={<User setProgress={setProgress}></User>}></Route> */}
+                 <Route path='/admin/users' element={<User setProgress={setProgress}></User>}></Route> 
                 {/* </Route> */}
             </Routes>
         </div>

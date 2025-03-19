@@ -5,11 +5,31 @@ function User(props) {
 
     useEffect(() => {
         // Fetch users from API (replace with your actual API endpoint)
-        fetch("/api/users")
+        fetch("/api/user/admin/users")
             .then((response) => response.json())
             .then((data) => setUsers(data))
             .catch((error) => console.error("Error fetching users:", error));
     }, []);
+
+    // const handleDelete = async (userId) => {
+    //     if (!window.confirm("Are you sure you want to delete this user?")) return;
+
+    //     try {
+    //         console.log(userId);
+    //         const response = await fetch(`/api/user/admin/users/${userId}`, {
+    //             method: "DELETE",
+    //         });
+
+    //         if (response.ok) {
+    //             setUsers(users.filter(user => user._id !== userId));
+    //         } else {
+    //             alert("Failed to delete user");
+    //         }
+    //     } catch (error) {
+    //         console.error("Error deleting user:", error);
+    //     }
+    // };
+
     return (
         <div className="container mx-auto p-6">
             <h2 className="text-2xl font-bold mb-4">User Management</h2>
@@ -20,9 +40,10 @@ function User(props) {
                             <th className="py-2 px-4">Avatar</th>
                             <th className="py-2 px-4">Username</th>
                             <th className="py-2 px-4">Email</th>
-                            <th className="py-2 px-4">Role</th>
-                            <th className="py-2 px-4">Verified</th>
+                            {/* <th className="py-2 px-4">Role</th>
+                            <th className="py-2 px-4">Verified</th> */}
                             <th className="py-2 px-4">Actions</th>
+                            {/* <th className="py-2 px-4">Remove</th> */}
                         </tr>
                     </thead>
                     <tbody>
@@ -38,16 +59,16 @@ function User(props) {
                                 <td className="py-2 px-4">{user.username}</td>
                                 <td className="py-2 px-4">{user.email}</td>
                                 <td className="py-2 px-4 font-semibold text-blue-600">{user.role}</td>
-                                <td className="py-2 px-4">
+                                {/* <td className="py-2 px-4">
                                     {user.isEmailVerified ? (
                                         <span className="text-green-500">Verified</span>
                                     ) : (
                                         <span className="text-red-500">Not Verified</span>
                                     )}
-                                </td>
-                                <td className="py-2 px-4">
-                                    <button className="bg-red-500 hover:bg-red-700 text-white px-4 py-1 rounded">Delete</button>
-                                </td>
+                                </td> */}
+                                {/* <td className="py-2 px-4">
+                                    <button className="bg-red-500 hover:bg-red-700 text-white px-4 py-1 rounded" onClick={() => handleDelete(user._id)}>Delete</button>
+                                </td> */}
                             </tr>
                         ))}
                     </tbody>

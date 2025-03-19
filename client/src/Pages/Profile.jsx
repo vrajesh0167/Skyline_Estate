@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from "firebase/storage";
 import firebase from '../Firebase';
 import { UserOutStart, userOutFail, userOutSuccess, userUpdateFail, userUpdateStart, userUpdateSuccess } from '../Store/User/Userslice';
-import { Link, useLocation } from 'react-router-dom'
+import { Link, Navigate, useLocation } from 'react-router-dom'
 
 export default function Profile(props) {
     const setProgress = props.setProgress;
@@ -20,7 +20,7 @@ export default function Profile(props) {
     // Show Listing state
     const [showListingError, setShowListingError] = useState(false);
     const [userListings, setUserListing] = useState([]);
-    // console.log(userListings);
+    console.log(userListings);
 
     const location = useLocation();
     const isAdmin = location.pathname.startsWith("/admin");
@@ -118,8 +118,10 @@ export default function Profile(props) {
             }
             dispatch(userOutSuccess());
             setFormData({});
+            Navigate('/')
         } catch (error) {
             dispatch(userOutFail(error.message));
+            Navigate('/');
             console.log(error);
         }
     }
@@ -148,13 +150,14 @@ export default function Profile(props) {
     const showListingHandler = async (e) => {
         e.preventDefault();
         try {
-            const res = await fetch(`/api/create/listings/${currentUser._id}`);
+            const res = await fetch(isAdmin ? `/api/create/allListing` : `/api/create/listings/${currentUser._id}`);
             const data = await res.json();
+            console.log(data);
             if (data.success === false) {
                 setShowListingError(data.message);
                 return;
             }
-            setUserListing(data);
+            setUserListing(isAdmin ? data.listings : data);
         } catch (error) {
             console.log(error);
             setShowListingError(error);
